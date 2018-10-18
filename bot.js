@@ -249,30 +249,32 @@ client.on('message', message => {
    message.delete()
   }
  });
-Client.on('guildMemberAdd', member => {
-    let new1 = member.guild.roles.find('name', "✦ Not Activated")
-    let staff = member.guild.channels.find('name', "✦-not-activated")
-    let staff1 = member.guild.roles.find('name', "✦ Discord Staff ")
-    member.sendMessage(`انتضر تفعيل`)
-    staff.send(`**هنا شخص جديد ${member} ينتضر تفعيل ${staff1}**`)
-    member.addRole(new1)
-});
- 
- 
-Client.on('message', message => {
-    let actrole = message.guild.roles.find('name', "• SO | 1.5k..")
-    let user = message.mentions.members.first()
-    if(message.content.startsWith(prefix + "%activeme")){
-        user.addRole(actrole)
-        var embed = new Discord.RichEmbed()
-        .setTitle(`تفعل!`)
-        .setThumbnail(user.avatarURL)
-        .addField(`تم تفعيل شخص!`, `${user} تم تفعليك من قبل <@${message.author.id}>`)
-        .setColor("RANDOM")
-        .setTimestamp()
-        .setFooter(" ")
-        message.channel.send({embed})
+
+client.on("guildMemberAdd", (member) => {
+    let channel = member.guild.channels.find('name', 'soft');
+    if (!channel) {
+        console.log("!channel fails");
+        return;
     }
+    if (member.id == client.user.id) {
+        return;
+    }
+    console.log('made it till here!');
+    var guild;
+    while (!guild)
+        guild = client.guilds.find("name", ".soft network")
+    guild.fetchInvites().then((data) => {
+        data.forEach((Invite, key, map) => {
+            var Inv = Invite.code;
+            if (dat[Inv])
+                if (dat[Inv] < Invite.uses) {
+                    console.log(3);
+                    console.log(`${member} joined over ${Invite.inviter}'s invite ${Invite.code}`)
+ channel.send(` ♥ **تم دعوته من قبل ${Invite.inviter} ♥ `)            
+ }
+            dat[Inv] = Invite.uses;
+        })
+    })
 });
 
 client.login(process.env.BOT_TOKEN2);
