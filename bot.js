@@ -173,14 +173,6 @@ client.on('message',async message => {
       }
     });
 
-var wait = new Set();
-client.on("message", function(message) {
-    if( wait.has(message.author.id) ) { 
-        message.channel.send("اصبر يحبيبي")
-    } else {
-         wait.add(message.author.id)    
-    }    
-});
 
 client.on("message", async message => {
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
