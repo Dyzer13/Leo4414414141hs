@@ -396,5 +396,32 @@ client.on('message', message => {
     }
 });
 
+client.on('message', (message) => {
+    if (message.content == prefix+'sad') {     ///تقدر تغير الامر
+    var rand2 = Math.round(Math.random()*3)
+    switch (rand2) {
+
+        case 0: rand2=("https://i.imgur.com/FoHPk21.gif");    ///تقدر تغير روابط الصور
+        
+        break;
+
+        case 1:
+                       rand2=("https://i.imgur.com/ZcSy6qT.gif");
+                       
+         break;
+                    
+        case 2:
+                       rand2=("https://i.imgur.com/9qDl6iv.gif");
+                       
+         break;
+            
+        case 3:
+                       rand2=("https://i.imgur.com/WUkVXoU.gif");
+                       
+         break;
+            }
+    message.channel.send(rand2);
+    }
+});
 
 client.login(process.env.BOT_TOKEN2);
