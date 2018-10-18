@@ -177,46 +177,7 @@ client.on("message", async message => {
       stopReacord = false;
     }     
 })
-client.on('message',async message => {
-    if(message.content.startsWith(prefix + "bc")) {
-      let filter = m => m.author.id === message.author.id;
-      let thisMessage;
-      let thisFalse;
-      message.channel.send('🇧🇨| **ارسل الرسالة الان**').then(msg => {
 
-      let awaitM = message.channel.awaitMessages(filter, {
-        max: 1,
-        time: 20000,
-        errors: ['time']
-      })
-      .then(collected => {
-        collected.first().delete();
-        thisMessage = collected.first().content;
-        msg.edit('🇧🇨| **هل انت متأكد؟**');
-        let awaitY = message.channel.awaitMessages(response => response.content === 'نعم' || 'لا' && filter,{
-          max: 1,
-          time: 20000,
-          errors: ['time']
-        })
-        .then(collected => {
-          if(collected.first().content === 'لا') {
-            msg.delete();
-            message.delete();
-            thisFalse = false;
-          }
-          if(collected.first().content === 'نعم') {
-            if(thisFalse === false) return;
-          message.guild.members.forEach(member => {
-            msg.edit('🇧🇨| **جاري الارسال**');
-            collected.first().delete();
-            member.send(`${thisMessage}\n\n${member} ,\nتم الارسال من : ${message.guild.name}\n تم الارسال بواسطة : ${message.author.tag}`);
-          });
-          }
-        });
-      });
-      });
-    }
-  });
 
 const devs = ["500019474494128139"];
 const adminprefix = ["-"];
@@ -253,4 +214,29 @@ if (message.content.startsWith(adminprefix + 'setavatar')) {
 }
 });
 
+client.on('message',async message => {
+  if(message.author.bot || message.channel.type === 'bc') return;
+  let args = message.content.split(' ');
+  if(args[0] === `${prefix}bc`) {
+    if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send('- **أنت لا تملك الصلاحيات اللازمة لأستخدام هذا الأمر**');
+    if(!args[1]) return message.channel.send('- **يجب عليك كتابة الرسالة بعد الأمر**');
+  
+    let msgCount = 0;
+    let errorCount = 0;
+    let successCount = 0;
+    message.channel.send(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`).then(msg => {
+      message.guild.members.forEach(g => {
+        g.send(args.slice(1).join(' ')).then(() => {
+          successCount++;
+          msgCount++;
+          msg.edit(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`);
+        }).catch(e => {
+          errorCount++;
+          msgCount++;
+          msg.edit(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`);
+        });
+      });
+    });
+  }
+});
 client.login(process.env.BOT_TOKEN2);
