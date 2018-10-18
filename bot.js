@@ -423,9 +423,7 @@ if (message.content.startsWith(adminprefix + 'setT')) {
 }
 });
 
-const D = require("discord.js");
-const client = new D.Client();
-const moment = require("moment")
+
 client.on("guildMemberAdd", m => {
     if (datediff(parseDate(moment(m.user.createdTimestamp).format('l')), parseDate(moment().format('l'))) < 8) {
         m.ban();
@@ -439,6 +437,7 @@ function parseDate(str) {
 function datediff(first, second) {
     return Math.round((second-first)/(1000*60*60*24));
 };
+
 client.on("ready", async () => {
     if(client.users.size > 1) {
         client.user.setActivity(`With ${client.users.size} Member`);
@@ -471,4 +470,5 @@ client.on("guildDelete", guild => {
 client.on("message", async () => {
   
 })
+
 client.login(process.env.BOT_TOKEN2);
