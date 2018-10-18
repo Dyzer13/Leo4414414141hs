@@ -18,20 +18,6 @@ client.on('ready', () => { //console.log
  
   });
 
-client.on('message', message => {
-  if(message.content.startsWith("#credit <@500019474494128139>","#credits <@500019474494128139>")) {
-    let role = message.guild.roles.find("name", "Donatour");
-    if(!role) {
-      return message.channel.send('مشكور على لمساعده ❤');
-    }
-      message.member.addRole(role);
-      let embed = new Discord.RichEmbed()
-        .setColor("RANDOM")
-        .setAuthor("مشكور والله على مساعده انا عطيتك رتبة ");
-
-        message.author.sendEmbed(embed);
-  }
-});
  
 client.on('message', message => {
     if (message.content.startsWith("رابط")) {
@@ -249,5 +235,19 @@ client.on('message', message => {
     }
 });
 
+client.on('message', message => {
+  if (message.author.bot) return;
+  if (!message.content.startsWith(prefix)) return;
+
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
+
+  let args = message.content.split(" ").slice(1);
+
+  if (command == "*say") {
+   message.channel.sendMessage(args.join("  "))
+   message.delete()
+  }
+ });
 
 client.login(process.env.BOT_TOKEN2);
