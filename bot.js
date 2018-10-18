@@ -424,51 +424,6 @@ if (message.content.startsWith(adminprefix + 'setT')) {
 });
 
 
-client.on("guildMemberAdd", m => {
-    if (datediff(parseDate(moment(m.user.createdTimestamp).format('l')), parseDate(moment().format('l'))) < 8) {
-        m.ban();
-    };
-});
-function parseDate(str) {
-    var mdy = str.split('/');
-    return new Date(mdy[2], mdy[0]-1, mdy[1]);
-};
 
-function datediff(first, second) {
-    return Math.round((second-first)/(1000*60*60*24));
-};
-
-client.on("ready", async () => {
-    if(client.users.size > 1) {
-        client.user.setActivity(`With ${client.users.size} Member`);
-        console.log(`${client.user.username} With ${client.users.size} Member`)
-    } else {
-        client.user.setActivity(`With ${client.users.size} Member`);
-        console.log(`${client.user.username} With ${client.users.size} Member`)
-    }
-    client.user.setStatus("online");
-});
-
-client.on("guildCreate", guild => {
-    console.log("Joined a new guild: " + guild.name);
-    if(client.users.size > 1) {
-        client.user.setActivity(`With ${client.users.size} Member`);
-    } else {
-        client.user.setActivity(`With ${client.users.size} Member`);
-    }
-});
-
-client.on("guildDelete", guild => {
-    console.log("Left a guild: " + guild.name);
-    if(client.users.size > 1) {
-        client.user.setActivity(`With ${client.users.size} Member`);
-    } else {
-        client.user.setActivity(`With ${client.users.size} Member`);
-    }
-});
-
-client.on("message", async () => {
-  
-})
 
 client.login(process.env.BOT_TOKEN2);
