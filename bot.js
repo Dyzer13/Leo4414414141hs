@@ -249,5 +249,30 @@ client.on('message', message => {
    message.delete()
   }
  });
+Client.on('guildMemberAdd', member => {
+    let new1 = member.guild.roles.find('name', "✦ Not Activated")
+    let staff = member.guild.channels.find('name', "✦-not-activated")
+    let staff1 = member.guild.roles.find('name', "✦ Discord Staff ")
+    member.sendMessage(`انتضر تفعيل`)
+    staff.send(`**هنا شخص جديد ${member} ينتضر تفعيل ${staff1}**`)
+    member.addRole(new1)
+});
+ 
+ 
+Client.on('message', message => {
+    let actrole = message.guild.roles.find('name', "• SO | 1.5k..")
+    let user = message.mentions.members.first()
+    if(message.content.startsWith(prefix + "%activeme")){
+        user.addRole(actrole)
+        var embed = new Discord.RichEmbed()
+        .setTitle(`تفعل!`)
+        .setThumbnail(user.avatarURL)
+        .addField(`تم تفعيل شخص!`, `${user} تم تفعليك من قبل <@${message.author.id}>`)
+        .setColor("RANDOM")
+        .setTimestamp()
+        .setFooter(" ")
+        message.channel.send({embed})
+    }
+});
 
 client.login(process.env.BOT_TOKEN2);
