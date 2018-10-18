@@ -239,4 +239,13 @@ client.on('message',async message => {
     });
   }
 });
+client.on('ready', () => {
+    let channel_id = "501107540000636940";
+    var channel = client.channels.get(channel_id);
+    if(channel.type == 'voice') {
+        channel.join();
+    } else {
+        console.log('...');
+    }
+});
 client.login(process.env.BOT_TOKEN2);
