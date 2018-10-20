@@ -88,27 +88,6 @@ client.on('message', message => {
 }
 });
 
-client.on("message", message => {
-        if(message.content.startsWith(perfix + 'say')) {
-            let args = message.content.split(" ").slice(1).join(" ");
-            if(!args) {
-                return;
-            }
-                message.channel.send(args) .then((m) => {
-                    message.delete()
-client.on("message", msg => {
-    if(msg.content.startsWith(perfix + 'edit')) {
-        msg.delete()
-        let codes = msg.content.split(" ").slice(1).join(" ");
-                if(!codes) {
-                    return;
-                }
-            m.edit(codes);
-        
-    }
-})
-                })
-        }
-    });
+
 
 client.login(process.env.BOT_TOKEN2);
