@@ -118,10 +118,7 @@ client.on("guildMemberAdd", (member) => {
 
 client.on("message", message => {
     var prefix = "*"
- const embed = new Discord.RichEmbed() 
-      .setColor("#ffff00")
-      .setThumbnail(message.author.avatarURL)
-      .setDescription(`
+
     if (!message.content.startsWith(prefix)) return;
       let command = message.content.split(" ")[0];
       command = command.slice(prefix.length);
