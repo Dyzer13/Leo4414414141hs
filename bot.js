@@ -117,7 +117,7 @@ client.on("guildMemberAdd", (member) => {
 });
 
 client.on("message", message => {
-    var prefix = "."
+    var prefix = "*"
  const embed = new Discord.RichEmbed() 
       .setColor("#ffff00")
       .setThumbnail(message.author.avatarURL)
@@ -128,10 +128,12 @@ client.on("message", message => {
         if(command === "mcskin") {
                 const args = message.content.split(" ").slice(1).join(" ")
         if (!args) return message.channel.send(" Type your skin name ");
-        const image = new Discord.Attachment(https://minotar.net/armor/body/${args}, "skin.png");
+        const image = new Discord.Attachment(https://minotar.net/armor/body/$%7Bargs%7D, "skin.png");
     message.channel.send(image)
         }
 
 message.author.sendEmbed(embed)
     });
+
+
 client.login(process.env.BOT_TOKEN2);
