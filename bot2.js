@@ -23,5 +23,13 @@ client.on('ready', () => { //playing
     client.user.setStatus('Online')
 });
 
+client.on('guildMemberAdd',member=>{
+  if(member.guild.id !== "342590736090529794") return;
+setTimeout(() => {
+
+  client.channels.get("497176831431278612").sendMessage("**#Welcome to __Venom Network__ **");
+},1500);
+
+});
 
 client.login(process.env.BOT_TOKEN);
