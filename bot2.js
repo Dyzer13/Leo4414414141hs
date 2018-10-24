@@ -18,6 +18,10 @@ client.on('ready', () => { //console.log
   console.log(`channels! * [ " ${client.channels.size} " ]`);
  
   });
+client.on('ready', () => { //playing
+    client.user.setGame(`#Venom 5k`,'https://www.twitch.tv/clo_wiin');
+    client.user.setStatus('Online')
+});
 
 client.on('guildMemberAdd',member=>{
   if(member.guild.id !== "342590736090529794") return;
