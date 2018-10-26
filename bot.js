@@ -88,5 +88,19 @@ client.on('message', message => {
 }
 });
 
+client.on('ready', () => { //playing
+    client.user.setGame(`**#North Network 1k**`,'https://www.twitch.tv/clo_wiin');
+    client.user.setStatus('Online')
+});
+
+client.on('guildMemberAdd',member=>{
+  if(member.guild.id !== "505076617945808897") return;
+setTimeout(() => {
+
+  client.channels.get("505076713441460234").sendMessage("**#Welcome to __North Network__ **");
+},1500);
+
+});
+
 
 client.login(process.env.BOT_TOKEN2);
