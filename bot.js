@@ -1,23 +1,23 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '*'
-
-client.on('ready', () => { //console.log
-  console.log('--------------------------');
-  console.log(' Bot Is Online')
-  console.log('--------------------------')
-  console.log(`Logged in as ${client.user.tag}!`);
-  console.log('--------------------------')
-  console.log(`Logged in as * [ " ${client.user.username} " ]`);
-  console.log('--------------------------')
-  console.log(`servers! * [ " ${client.guilds.size} " ]`);
-  console.log('--------------------------')
-  console.log(` Users! * [ " ${client.users.size} " ]`);
-  console.log('--------------------------')
-  console.log(`channels! * [ " ${client.channels.size} " ]`);
- 
-  });
-
+client.on('ready', function(){    
+    var ms = 40000 ;    
+    var setGame = ['1kkk','.Soft Network'];    
+    var i = -1;    
+    var j = 0;    
+    setInterval(function (){    
+        if( i == -1 ){    
+j = 1;    
+       }    
+        if( i == (setGame.length)-1 ){    
+            j = -1;    
+      }    
+       i = i+j;    
+        client.user.setGame(setGame[i],`http://www.youtube.com/gg`);    
+}, ms);    
+    
+});
  
 
 client.on('message',async message => {
@@ -100,10 +100,6 @@ client.on('message', function(message) {
     }
 })
 
-client.on('ready', () => { //playing
-    client.user.setGame(`**#North Network 1k**`,'https://www.twitch.tv/clo_wiin');
-    client.user.setStatus('Online')
-});
 
 client.on('guildMemberAdd',member=>{
   if(member.guild.id !== "505076617945808897") return;
