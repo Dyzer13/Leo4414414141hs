@@ -66,13 +66,9 @@ client.on('message', message => {
                 .setAuthor(message.guild.name, message.guild.iconURL)
         .setDescription(`
 **
----------------------
 -[${message.guild.name}]  هذا هو رابط سيرفر
----------------------
 -هذا الرابط صالح ل 100 مستخدم فقط
----------------------
 -هذا الرابط صالح لمده 24 ساعه فقط
----------------------
 **`)
       message.author.sendEmbed(Embed11)
     }
@@ -103,10 +99,10 @@ client.on('message', function(message) {
 
 
 client.on('guildMemberAdd',member=>{
-  if(member.guild.id !== "505076617945808897") return;
+  if(member.guild.id !== "502796534522445824") return;
 setTimeout(() => {
 
-  client.channels.get("505076713441460234").sendMessage("**#Welcome to __North Network__ **");
+  client.channels.get("508061028152639498").sendMessage("**#Welcome to __North Network__ **");
 },1500);
 
 });
