@@ -98,67 +98,79 @@ client.on('message', function(message) {
 })
 
 
-client.on('guildMemberAdd',member=>{
-  if(member.guild.id !== "502796534522445824") return;
-setTimeout(() => {
+  if(command === "say") {
+    // makes the bot say something and delete the message. As an example, it's open to anyone to use. 
+    // To get the "message" itself we join the `args` back into a string with spaces: 
+    const sayMessage = args.join(" ");
+    // Then we delete the command message (sneaky, right?). The catch just ignores the error with a cute smiley thing.
+    message.delete().catch(O_o=>{}); 
+    // And we get the bot to say the thing: 
+    message.channel.send(sayMessage);
+  }
+  
+  if(command === "kick") {
+    // This command must be limited to mods and admins. In this example we just hardcode the role names.
+    // Please read on Array.some() to understand this bit: 
+    // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
+    if(!message.member.roles.some(r=>["Administrator", "Moderator"].includes(r.name)) )
+      return message.reply("Sorry, you don't have permissions to use this!");
+    
+    // Let's first check if we have a member and if we can kick them!
+    // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
+    // We can also support getting the member by ID, which would be args[0]
+    let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+    if(!member)
+      return message.reply("Please mention a valid member of this server");
+    if(!member.kickable) 
+      return message.reply("I cannot kick this user! Do they have a higher role? Do I have kick permissions?");
+    
+    // slice(1) removes the first part, which here should be the user mention or ID
+    // join(' ') takes all the various parts to make it a single string.
+    let reason = args.slice(1).join(' ');
+    if(!reason) reason = "No reason provided";
+    
+    // Now, time for a swift kick in the nuts!
+    await member.kick(reason)
+      .catch(error => message.reply(`Sorry ${message.author} I couldn't kick because of : ${error}`));
+    message.reply(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
 
-  client.channels.get("508061028152639498").sendMessage("**#Welcome to __North Network__ **");
-},1500);
+  }
+  
+  if(command === "ban") {
+    // Most of this command is identical to kick, except that here we'll only let admins do it.
+    // In the real world mods could ban too, but this is just an example, right? ;)
+    if(!message.member.roles.some(r=>["Administrator"].includes(r.name)) )
+      return message.reply("Sorry, you don't have permissions to use this!");
+    
+    let member = message.mentions.members.first();
+    if(!member)
+      return message.reply("Please mention a valid member of this server");
+    if(!member.bannable) 
+      return message.reply("I cannot ban this user! Do they have a higher role? Do I have ban permissions?");
 
+    let reason = args.slice(1).join(' ');
+    if(!reason) reason = "No reason provided";
+    
+    await member.ban(reason)
+      .catch(error => message.reply(`Sorry ${message.author} I couldn't ban because of : ${error}`));
+    message.reply(`${member.user.tag} has been banned by ${message.author.tag} because: ${reason}`);
+  }
+  
+  if(command === "purge") {
+    // This command removes all messages from all users in the channel, up to 100.
+    
+    // get the delete count, as an actual number.
+    const deleteCount = parseInt(args[0], 10);
+    
+    // Ooooh nice, combined conditions. <3
+    if(!deleteCount || deleteCount < 2 || deleteCount > 100)
+      return message.reply("Please provide a number between 2 and 100 for the number of messages to delete");
+    
+    // So we get our messages, and delete them. Simple enough, right?
+    const fetched = await message.channel.fetchMessages({limit: deleteCount});
+    message.channel.bulkDelete(fetched)
+      .catch(error => message.reply(`Couldn't delete messages because of: ${error}`));
+  }
 });
 
-client.on("message", async message => {
-  const prefix = config.prefix;
-  const args = message.content.slice(prefix.length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase();
-
-  if (message.author.id !== client.user.id || message.content.indexOf(client.config.prefix) !== 0) return;
-
-  if (command === "1") {
-    var count = 1; // Number of messages sent (modified by sendSpamMessage)
-    var maxMessages = 100000; // Change based on how many messages you want sent
-
-    function sendSpamMessage() {
-      // You could modify this to send a random string from an array (ex. a quote), create a
-      // random sentence by pulling words from a dictionary file, or to just send a random
-      // arrangement of characters and integers. Doing something like this may help prevent
-      // future bots from detecting that you sent a spam message.
-      message.channel.send("تلفيل #" + count);
-
-      if (count < maxMessages) {
-        // If you don't care about whether the messages are deleted or not, like if you created a dedicated server
-        // channel just for bot spamming, you can remove the below line and the entire prune command.
-        message.channel.send("");
-        count++;
-
-        /* These numbers are good for if you want the messages to be deleted.
-         * I've also noticed that Discord pauses for about 4 seconds after you send 9
-         * messages in rapid succession, and this prevents that. I rarely have any spam
-         * messages slip through unless there is a level up from mee6 or Tatsumaki. */
-        let minTime = Math.ceil(2112);  // Rush RP1
-        let maxTime = Math.floor(3779); // Arbitrary integer
-        let timeToWait = Math.floor(Math.random() * (maxTime - minTime)) + minTime;
-        setTimeout(sendSpamMessage, timeToWait);
-      } else {
-        // Sends a message when count is equal to maxMessages. Else statement can be 
-        // modified/removed without consequence.
-        message.channel.send("------------------");
-        message.channel.send("I AM FINISHED!!!");
-        message.channel.send("------------------");
-      }
-    }
-
-    message.delete().catch(O_o=>{})
-    sendSpamMessage();
-  }
-
-  if (command === "2") {
-    message.channel.fetchMessages()
-    .then(messages => {
-      let message_array = messages.array();
-      message_array.length = 2;
-      message_array.map(msg => msg.delete().catch(O_o => {}));
-     });
-  }
-});
 client.login(process.env.BOT_TOKEN2);
