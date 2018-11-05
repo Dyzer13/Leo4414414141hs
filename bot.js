@@ -43,4 +43,4 @@ let embed = new Discord.RichEmbed()
   channel.sendEmbed(embed);
 });
 
-bot.login("process.env.BOTTOKEN2");
+bot.login("process.env.BOT_TOKEN");
