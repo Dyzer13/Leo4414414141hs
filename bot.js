@@ -1,7 +1,7 @@
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const prefix = '*'
+const prefix = '-'
 
 client.on('ready', () => { //console.log
   console.log('--------------------------');
@@ -22,13 +22,6 @@ client.on('ready', () => { //playing
     client.user.setGame(`.SoftNetwork`,'https://www.twitch.tv/clo_wiin');
     client.user.setStatus('Online')
 });
-
-client.on('guildMemberAdd',member=>{
-  if(member.guild.id !== "342590736090529794") return;
-setTimeout(() => {
-
-  client.channels.get("497176831431278612").sendMessage("**#Welcome to __Venom Network__ **");
-},1500);
 
 });
 client.on('message',async message => {
@@ -56,7 +49,7 @@ client.on('message',async message => {
     });
   }
 });
-var prefix = "*";
+var prefix = "-";
 client.on('message', message => {
   if (message.author.bot) return;
   if (!message.content.startsWith(prefix)) return;
