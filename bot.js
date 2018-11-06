@@ -18,10 +18,7 @@ client.on('ready', () => { //console.log
   console.log(`channels! * [ " ${client.channels.size} " ]`);
  
   });
-client.on('ready', () => { //playing
-    client.user.setGame(`.SoftNetwork`,'https://www.twitch.tv/clo_wiin');
-    client.user.setStatus('Online')
-});
+
 
 });
 client.on('message',async message => {
@@ -49,15 +46,6 @@ client.on('message',async message => {
     });
   }
 });
-var prefix = "-";
-client.on('message', message => {
-  if (message.author.bot) return;
-  if (!message.content.startsWith(prefix)) return;
-  let command = message.content.split(" ")[0];
-  command = command.slice(prefix.length);
-  let args = message.content.split(" ").slice(1);
-  if (command == "say") {
-   message.channel.sendMessage(args.join("  "))
-  }
-});
+
+
 client.login(process.env.BOT_TOKEN);
