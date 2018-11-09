@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '-'
 
-client.user.setGame('Test For Get Out' ,"https://www.twitch.tv/clo_wiin") 
+client.user.setGame(`Test For Get Out` ,"https://www.twitch.tv/clo_wiin") 
        );
 ));     
 
