@@ -1133,5 +1133,12 @@ client.on('message', message => {
 }
 });
 
+  client.on('message', message => {
+     if(message.content.startsWith(prefix +"bans")) {
+        message.guild.fetchBans()
+        .then(bans => message.channel.send(`The ban count **${bans.size}** Person`))
+  .catch(console.error);
+}
+});
 
 client.login(process.env.BOT_TOKEN);
