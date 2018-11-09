@@ -470,5 +470,27 @@ ${args}
     }
   );
 
+client.on('message', message => {
+
+
+if (message.content === prefix + "mutechannel") {
+           message.channel.overwritePermissions(message.guild.id, {
+         SEND_MESSAGES: false
+
+           }).then(() => {
+               message.reply("Channel Muted ✅ ")
+           });
+}
+  if (message.content === prefix + "unmutechannel") {
+           message.channel.overwritePermissions(message.guild.id, {
+         SEND_MESSAGES: true
+
+           }).then(() => {
+               message.reply("Channel UnMuted ✅ ")
+           });
+}
+
+
+});
 
 client.login(process.env.BOT_TOKEN);
