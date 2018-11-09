@@ -229,4 +229,34 @@ Sender <@${message.author.id}>                                                  
   }
   });
 
+   client.on("roleUpdate", (re,updated) => {
+    client.setTimeout(() => {
+      re.guild.fetchAuditLogs({
+          limit: 1,
+          type: 30
+        })
+        .then(audit => {
+          let exec = audit.entries.map(a => a.executor.username)
+          try {
+  
+            let log = re.guild.channels.find('name', 'لوق');
+            if (!log) return;
+            let embed = new Discord.RichEmbed()
+              .setColor('BLACK')
+              .setTitle("✏  Role Name Updated")
+              .addField("Old",`${re.name}`,true)
+              .addField("New",`${updated.name}`,true )
+              .addField("Role id",`${re.id}`,true )
+              .addField('By', exec, true)
+              .setTimestamp()
+            log.send(embed).catch(e => {
+              console.log(e);
+            });
+          } catch (e) {
+            console.log(e);
+          }
+        })
+    }, 1000)
+  })
+
 client.login(process.env.BOT_TOKEN);
