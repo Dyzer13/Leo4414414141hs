@@ -446,6 +446,29 @@ message.channel.sendEmbed(embed);
 });
 
 
+  client.on('message', ReBeeL => {
+  var prefix = ".";
+    if(ReBeeL.author.bot) return;
+      if(ReBeeL.content.startsWith(prefix + "owner")) {
+        let args = ReBeeL.content.split(" ").slice(1);
+           if(!args[0]) {
+              ReBeeL.channel.send("** =owner <message> **")
+                return;
+                  }
+                   var rebel = new Discord.RichEmbed()
+                      .setColor("RANDOM")
+                        .setDescription(`
+تم إرسآل لك رسآلة من السيرفر الخاص بك
+${ReBeeL.guild.name}
+الرسآلة
+${args}
+        `)
+        .setFooter(` بوآسطة ${ReBeeL.author.username}#${ReBeeL.author.discriminator}`)
+       ReBeeL.guild.owner.send(rebel);
+      ReBeeL.channel.send("**تم إرسآل الرسآلة إلى أونر السيرفر**")
+     }
+    }
+  );
 
 
 client.login(process.env.BOT_TOKEN);
