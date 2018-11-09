@@ -5,7 +5,7 @@ const prefix = '-'
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-client.user.setGame(`1play`,"https://www.twitch.tv/Anime & Games")
+client.user.setGame(`#SoftNetwork`,"https://www.twitch.tv/Anime & Games")
   console.log('')
   console.log('')
   console.log('╔[═════════════════════════════════════════════════════════════════]╗')
