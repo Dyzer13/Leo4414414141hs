@@ -405,4 +405,16 @@ client.on('guildCreate', guild => {
       guild.owner.send(embed)
 });
 
+client.on('message', message => {
+     if (message.content === ".bot") {
+            if(!message.channel.guild) return message.reply('** This command only for servers **');
+     let embed = new Discord.RichEmbed()
+  .setColor('RANDOM')
+  .addField("**🔱عدد السيرفرات الي فيها البوت🔱:**" , client.guilds.size)
+  .addField("**👑المستخدمين👑:**", client.users.size)
+  .addField("**🚩قنوات🚩:**", client.channels.size)
+  .setTimestamp()
+message.channel.sendEmbed(embed);
+    }
+});
 client.login(process.env.BOT_TOKEN);
