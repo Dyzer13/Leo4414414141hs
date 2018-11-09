@@ -1,7 +1,16 @@
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const prefix = '-'
+const convert = require("hh-mm-ss")
+const dateFormat = require('dateformat');
+const fs = require('fs');
+const pretty = require('pretty-ms');
+const rn = require('random-number');
+const userData = JSON.parse(fs.readFileSync('./userData.json', 'utf8'));
+const moment = require('moment');
+var jimp = require('jimp')
+const prefix = ".";
+let done = {};
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
