@@ -364,4 +364,37 @@ if(message.content.startsWith(prefix+"userinfo")) {
   .catch(e => logger.error(e));
 }
  });
+
+client.on("guildMemberAdd", member => {
+  member.createDM().then(function (channel) {
+  return channel.send(`👑ولكم نورت السيرفر | Welcome To Server👑 
+اسم العضو المحترم |name member🌷  ${member}
+انت العضو الأسطورة رقم |you member number is👑 ${member.guild.memberCount}`) 
+}).catch(console.error)
+})
+
+
+
+
+client.on("message", (message) => {
+if (message.content.startsWith(".setchannel")) {
+        let args = message.content.split(" ").slice(1);
+    message.guild.createChannel(args.join(' '), 'text');
+message.channel.sendMessage('تـم إنـشاء روم كـتابـي بنجاح|✅')
+
+}
+});
+
+
+
+
+
+client.on("message", (message) => {
+if (message.content.startsWith(".setvoice")) {
+        let args = message.content.split(" ").slice(1);
+    message.guild.createChannel(args.join(' '), 'voice');
+    message.channel.sendMessage('تـم إنـشاء روم صـوتي بنجاح|✅')
+
+}
+});
 client.login(process.env.BOT_TOKEN);
