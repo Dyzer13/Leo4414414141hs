@@ -316,7 +316,7 @@ client.on("roleCreate", role => {
   }, 1000)
 })
 
-lient.on('message' , message => {
+client.on('message' , message => {
     var prefix = ".";
 if(message.content.startsWith(prefix+"userinfo")) {
     let user = message.mentions.users.first() || message.author;
