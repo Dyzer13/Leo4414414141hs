@@ -1159,4 +1159,9 @@ client.on('message', msg => {
         }
 })
 
+client.on('message', msg => {
+  if (msg.content === '.ownerbot') {
+    msg.reply('**OwnerBot <@506996140898648074>**');
+  }
+});
 client.login(process.env.BOT_TOKEN);
