@@ -109,4 +109,65 @@ client.on('message', msg => {
   }, 1000);
 });
 
+ client.on('guildMemberRemove', member => {
+    if (!member || !member.id || !member.guild) return;
+    const guild = member.guild;
+	
+    const channel = member.guild.channels.find('name', 'لوق');
+    if (!channel) return;
+    let memberavatar = member.user.avatarURL
+    const fromNow = moment(member.joinedTimestamp).fromNow();
+    
+    let embed = new Discord.RichEmbed()
+       .setAuthor(`${member.user.tag}`, member.user.avatarURL)
+	   .setThumbnail(memberavatar)
+       .setColor('RAMDOM')
+       .setDescription(`📤 <@${member.user.id}> **Leave From Server**\n\n`)
+       .setTimestamp();
+     channel.send({embed:embed});
+});
+ client.on('voiceStateUpdate', (oldM, newM) => {
+  let m1 = oldM.serverMute;
+  let m2 = newM.serverMute;
+   let d1 = oldM.serverDeaf;
+  let d2 = newM.serverDeaf;
+   let ch = oldM.guild.channels.find('name', 'لوق')
+  if(!ch) return;
+     oldM.guild.fetchAuditLogs()
+    .then(logs => {
+       let user = logs.entries.first().executor
+     if(m1 === false && m2 === true) {
+       let embed = new Discord.RichEmbed()
+       .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
+       .setDescription(`${newM} has muted in server`)
+       .setFooter(`By : ${user}`)
+        ch.send(embed)
+    }
+    if(m1 === true && m2 === false) {
+       let embed = new Discord.RichEmbed()
+       .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
+       .setDescription(`${newM} has unmuted in server`)
+       .setFooter(`By : ${user}`)
+       .setTimestamp()
+        ch.send(embed)
+    }
+    if(d1 === false && d2 === true) {
+       let embed = new Discord.RichEmbed()
+       .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
+       .setDescription(`${newM} has deafened in server`)
+       .setFooter(`By : ${user}`)
+       .setTimestamp()
+        ch.send(embed)
+    }
+    if(d1 === true && d2 === false) {
+       let embed = new Discord.RichEmbed()
+       .setAuthor(`${newM.user.tag}`, newM.user.avatarURL)
+       .setDescription(`${newM} has undeafened in server`)
+       .setFooter(`By : ${user}`)
+       .setTimestamp()
+        ch.send(embed)
+    }
+  })
+});
+
 client.login(process.env.BOT_TOKEN);
