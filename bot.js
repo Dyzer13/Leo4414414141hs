@@ -633,4 +633,27 @@ m.sendMessage(args)
 }
 });
 
+  client.on('message', message => {
+      if (message.content.startsWith(prefix + 'clear')) {
+    if(!message.channel.guild) return;
+let args = message.content.split(" ").slice(1);
+
+  const messagecount = parseInt(args.join(' '));
+
+  message.channel.fetchMessages({
+
+    limit: messagecount
+
+}).then(messages => message.channel.bulkDelete(messages));
+
+   var embed = new Discord.RichEmbed()
+        .setTitle('تم مسح الشات بنجاح ✅')
+        .setColor('RED')
+       message.channel.sendEmbed(embed)
+
+};
+
+});
+
+
 client.login(process.env.BOT_TOKEN);
