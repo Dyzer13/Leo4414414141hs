@@ -3,8 +3,6 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-";
 
-
-
       client.on('ready', () => {
         console.log(`back`);
               client.user.setActivity("SoftNetwork", {type: 'LISTENING'});
@@ -1261,16 +1259,6 @@ m.delete(1500);
    args.send({embed : embed});
                     });
     }
-});
-
-client.on('message', message => {
-        if (message.content.startWith(prefix + "unban all")){
-    if(!message.channel.guild) return;
-     message.guild.members.forEach( member => {
-         
-         member.unban()
-     })
-}
 });
 
 client.on("message", message => {
