@@ -1301,8 +1301,8 @@ Member Count: __${guild.memberCount}__
 Servers Counter : __${client.guilds.size}__**`)
          .setColor("#f3ae10")
          .addField("New Server!")
-         .setFooter('اسم البوت' , client.user.avatarURL)
-           client.channels.get("ايدي الروم").send({embed});
+         .setFooter('Soft Network' , client.user.avatarURL)
+           client.channels.get("510761434838335498").send({embed});
 }
 
 );
