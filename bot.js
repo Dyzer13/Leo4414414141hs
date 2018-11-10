@@ -75,7 +75,7 @@ client.on('message', message => {
 Server Support : https://discord.gg/FAzybWQ
 
 ❖════════════════════════════════════════════════════════❖
-
+${member}
 
 `);
 
