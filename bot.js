@@ -5,7 +5,7 @@ const prefix = "+";
 
       client.on('ready', () => {
         console.log(`back`);
-              client.user.setActivity("+inv |Soon ", {type: 'LISTENING'});
+              client.user.setActivity("+inv | update ", {type: 'LISTENING'});
       
       });;
 
