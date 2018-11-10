@@ -841,33 +841,6 @@ client.on('message', message => {
         }
     });
 
-client.on('message', message => {
-if (message.author.codes) return;
-if (!message.content.startsWith(prefix)) return;
-
-let command = message.content.split(" ")[0];
-command = command.slice(prefix.length);
-
-let args = message.content.split(" ").slice(1);
-
-if (command == "$kick") {
-             if(!message.channel.guild) return message.reply('❌ **ليس لديك الصلاحيات الكافية**');
-       
-if(!message.guild.member(message.author).hasPermission("KICK_MEMBERS")) return message.reply("❌**انت لا تملك الصلاحيات المطلوبه**");
-if(!message.guild.member(client.user).hasPermission("KICK_MEMBERS")) return message.reply("❌ **ليس معي الصلاحيات الكافية**");
-let user = message.mentions.users.first();
-
-if (message.mentions.users.size < 1) return message.reply("- **منشن شخص**");
-if (!message.guild.member(user)
-.bannable) return message.reply("❌**يجب ان تكون رتبة البوت اعلي من رتبه الشخص المراد طردة**");
-
-
-message.guild.member(user).kick(7, user);
-
-message.channel.send(`**:white_check_mark: »  ${user.tag} kicked from the server ! :airplane: **  `)
-
-}
-});
 
 
 client.on('message', async message => {
