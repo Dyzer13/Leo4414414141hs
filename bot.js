@@ -10,91 +10,7 @@ const prefix = "+";
       });;
 
 
-const afk = require('./afk.json');
-client.on('message',async rebel => {
-      if(rebel.author.bot) return;
-  if (afk[rebel.author.id]) {
-    delete afk[rebel.author.id];
-    if (rebel.member.nickname === null) {
-      msg.channel.send("أهلا بك , <@"+rebel.author.id+"> أنأ **أحاول** أن أزيل عنك الأفك.");     } else {
-      rebel.member.setNickname(rebel.member.nickname.replace(/(\[AFK\])/,''));
-      rebel.channel.send("أهلا بك , <@"+rebel.author.id+"> تم فك عنك الأفك بسبب رجوعك."); 
-    }
-    fs.writeFile("./afk.json", JSON.stringify(afk), (err) => {if (err) console.error(err);});
-} else {
-    if (rebel.content.startsWith(prefix + 'afk ')||rebel.content === prefix + 'afk') {
-      rebel.member.setNickname("[AFK] " + rebel.member.displayName);
-      let args1 = rebel.content.split(' ').slice(1);
-      if (args1.length === 0) {
-        afk[rebel.author.id] = {"reason": true}; 
-        rebel.reply("** لقد وضعتك بوضع الأفك **")
-      } else {
-        afk[rebel.author.id] = {"reason": args1.join(" ")}; // with reason
-        rebel.reply("لقد أضفتك للأفك بسبب "+ args1.join(" ") + ".")
-      }
-      fs.writeFile("./afk.json", JSON.stringify(afk), (err) => {if (err) console.error(err);});   
-  }
-}
-         var mentionned = rebel.mentions.users.first();
-if(rebel.mentions.users.size > 0) return ;
-if (afk[rebel.mentions.users.first().id]) {
-if (afk[rebel.mentions.users.first().id].reason === true) {
-rebel.channel.send(`**<@!${mentionned.id}> مأفك** `);
-}else{
-rebel.channel.send(`**<@!${mentionned.username}> مأفك , سبب الأفك \n ${afk[rebel.mentions.users.first().id].reason}**`);
-}
-} 
-});
 
-client.on('message',async message => {
-  if(message.author.bot || message.channel.type === 'bc') return;
-  let args = message.content.split(' ');
-  if(args[0] === `${prefix}bc`) {
-    if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send('- **أنت لا تملك الصلاحيات اللازمة لأستخدام هذا الأمر**');
-    if(!args[1]) return message.channel.send('- **يجب عليك كتابة الرسالة بعد الأمر**');
-  
-    let msgCount = 0;
-    let errorCount = 0;
-    let successCount = 0;
-    message.channel.send(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`).then(msg => {
-      message.guild.members.forEach(g => {
-        g.send(args.slice(1).join(' ')).then(() => {
-          successCount++;
-          msgCount++;
-          msg.edit(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`);
-        }).catch(e => {
-          errorCount++;
-          msgCount++;
-          msg.edit(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`);
-        });
-      });
-    });
-  }
-});
-
-client.on('message', msg => {
-    if(msg.author.bot) return;
-    
-    if(msg.content === '.linkserver') {
-      client.guilds.forEach(g => {
-        
-        let l = g.id
-        g.channels.get(g.channels.first().id).createInvite({
-          maxUses: 5,
-          maxAge: 86400
-        }).then(i => msg.channel.send(`
-        **
-        Invite Link : <https://discord.gg/${i.code}>
-        Server : ${g.name} | Id : ${g.id} 
-        Owner ID : ${g.owner.id}
-        **
-        `))
-  
-  
-      })
-    }
-    
-  })
 
    client.on("guildBanAdd", (guild, member) => {
   client.setTimeout(() => {
@@ -1089,13 +1005,7 @@ client.on('message', message => {
 }
 });
 
-  client.on('message', message => {
-     if(message.content.startsWith(prefix +"bans")) {
-        message.guild.fetchBans()
-        .then(bans => message.channel.send(`The ban count **${bans.size}** Person`))
-  .catch(console.error);
-}
-});
+
 
 
 client.on('message', msg => {
@@ -1121,32 +1031,7 @@ client.on('message', msg => {
   }
 });
 
-client.on('message', async message => {
-            if(!message.channel.guild) return;
-             if (message.content.startsWith("1set")) {
-let args = message.content.split(' ').slice(1).join(' ');
-            let sigMessage = await args;
-            
-            if (sigMessage === "online") {
-                client.user.setStatus("online");
-                message.author.send("Your status was set to online.");
-            }
-            if (sigMessage === "idle") {
-                client.user.setStatus("idle");
-                message.author.send("Your status was set to idle.");
-            }
-            if (sigMessage === "invisible") {
-                client.user.setStatus("invisible");
-                message.author.send("Your status was set to invisible.");
-            }
-            if (sigMessage === "dnd") {
-                client.user.setStatus("dnd");
-                message.author.send("Your status was set to dnd.");
-            }
-            // message.author.send("." + message.content);
-        
-}
-});
+
 
 client.on('message', ( message ) => {
   if(message.author.bot) return;
