@@ -591,27 +591,26 @@ m.sendMessage(args)
 }
 });
 
-  client.on('message', message => {
-      if (message.content.startsWith(prefix + 'clear')) {
-    if(!message.channel.guild) return;
-let args = message.content.split(" ").slice(1);
-
-  const messagecount = parseInt(args.join(' '));
-
-  message.channel.fetchMessages({
-
-    limit: messagecount
-
-}).then(messages => message.channel.bulkDelete(messages));
-
-   var embed = new Discord.RichEmbed()
-        .setTitle('تم مسح الشات بنجاح ✅')
-        .setColor('RED')
-       message.channel.sendEmbed(embed)
-
-};
-
-});
+client.on("message", message => {
+              var args = message.content.substring(prefix.length).split(" ");
+              if (message.content.startsWith(prefix + "clear")) {
+                  if(!message.channel.guild) return message.reply('**❌ اسف لكن هذا الامر للسيرفرات فقط **');         
+     if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**⚠  لا يوجد لديك صلاحية لمسح الشات**');
+          var msg;
+          msg = parseInt();
+        
+        message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
+        message.channel.sendMessage("", {embed: {
+          title: "``تــم مسح الشات ``",
+          color: 0x06DF00,
+          footer: {
+            
+          }
+        }}).then(msg => {msg.delete(3000)});
+                            }
+  
+       
+  });
 
   client.on('message', message => {
     if (message.content.startsWith(".avatar")) {
@@ -1187,5 +1186,15 @@ client.on('message', ( message ) => {
     }
   }
 
+});
+
+
+client.on("message", message => {
+var prefix = "!";//البرفكس
+        if(message.content.startsWith(prefix + "say")) {
+    if(message.author.id !== "506996140898648074") return message.reply("هذا الامر لصحاب البوت فقط");
+        let args = message.content.split(" ").slice(1);
+message.channel.send(args)
+        }
 });
 client.login(process.env.BOT_TOKEN);
