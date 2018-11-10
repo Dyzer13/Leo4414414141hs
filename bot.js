@@ -1227,7 +1227,7 @@ client.on("message", message => {
       command = command.slice(prefix.length);
         if(command === "mcskin") {
                 const args = message.content.split(" ").slice(1).join(" ")
-        if (!args) return message.channel.send("** اكتب اسم اسكنك **");
+        if (!args) return message.channel.send("**<@"+author.id+"> اكتب اسم اسكنك **");
         const image = new Discord.Attachment(`https://minotar.net/armor/body/${args}`, "skin.png");
     message.channel.send(image)
         }
