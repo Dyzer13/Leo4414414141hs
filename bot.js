@@ -1308,19 +1308,5 @@ Servers Counter : __${client.guilds.size}__**`)
 );
 
 
-Client.on('message', message => {
-
-    if (message.content === "-count") {
-
-    let embed = new Discord.RichEmbed()
-
-.addField('**Count**: ' , message.guild.memberCount)
-.setColor("RANDOM")
-.set footor(By void >> ALPHA CoDeS)
-.setDescription(`${message.guild.name}`)
-     message.channel.sendEmbed(embed);
-} 
-
-});
 
 client.login(process.env.BOT_TOKEN);
