@@ -20,28 +20,42 @@ const prefix = "+";
 
 
 
-client.on('message', message => {
-  if (!message.content.startsWith(PREFIX)) return;
-  var args = message.content.split(' ').slice(1);
-  var argresult = args.join(' ');
-  if (message.author.id !== "506996140898648074") return;
- 
-if (message.content.startsWith(PREFIX + 'setstream')) {
-  client.user.setGame(argresult, "https://www.twitch.tv/darkknite55%22);
-     console.log('test' + argresult);
-    message.channel.sendMessage(Streaming: ${argresult})
-}
- 
-if (message.content.startsWith(PREFIX + 'setname')) {
-  client.user.setUsername(argresult).then
-      message.channel.sendMessage(Username Changed To ${argresult})
-  return message.reply("You Can change the username 2 times per hour");
-}
-if (message.content.startsWith(PREFIX + 'setavatar')) {
-  client.user.setAvatar(argresult);
-   message.channel.sendMessage(Avatar Changed Successfully To ${argresult}**);
-}
-});
+client.on('message', async message =>{
+  if (message.author.boss) return;
+    var prefix = "$";
+
+if (!message.content.startsWith(prefix)) return;
+    let command = message.content.split(" ")[0];
+     command = command.slice(prefix.length);
+    let args = message.content.split(" ").slice(1);
+    if (command == "warn") {
+        if (!message.channel.guild) return;
+        if(!message.guild.roles.find(r => r.name === 'warns')); //code by iBeAnthonyD
+        if(!message.guild.roles.find(r => r.name === 'warns')); //code by iBeAnthonyD
+        let user = message.mentions.users.first();
+        if (message.mentions.users.size < 1) return message.reply(' يجب عليك المنشن اولاً ').then(msg => {msg.delete(5000)});
+        let reason = message.content.split(" ").slice(2).join(" ");
+        const muteembed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+        .setAuthor(Warned!, user.displayAvatarURL)
+        .setThumbnail(user.displayAvatarURL)
+        .addField("👥  المستخدم",  '[ ' + ${user.tag} + ' ]',true)
+        .addField("🔨  تم بواسطة ", '[ ' + ${message.author.tag} + ' ]',true)
+        .addField("📖  السبب", '[ ' + ${reason} + ' ]',true)
+        .addField("User", user, true)
+        message.channel.send({embed : muteembed});
+        var muteembeddm = new Discord.RichEmbed()
+        .setAuthor(Warned!, user.displayAvatarURL)
+        .setDescription(${user} تم اعطائك تحذير
+${message.author.tag}  بواسطة
+[ ${reason} ] : السبب
+اتمنى ان لا يتكرر هذا الغلط مجددا)
+        .setFooter(في سيرفر : ${message.guild.name})
+        .setColor("RANDOM")
+    user.send( muteembeddm);
+  }
+  });
+
 
    client.on("guildBanAdd", (guild, member) => {
   client.setTimeout(() => {
