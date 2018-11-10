@@ -6,7 +6,7 @@ const prefix = "-";
 
       client.on('ready', () => {
         console.log(`back`);
-              client.user.setActivity("codes", {type: 'LISTENING'});
+              client.user.setActivity("SoftNetwork", {type: 'LISTENING'});
       
       });;
 
