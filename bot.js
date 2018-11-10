@@ -2,9 +2,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-";
-const invites = {};
 
-const wait = require('util').promisify(setTimeout);
 
 
       client.on('ready', () => {
@@ -1237,27 +1235,33 @@ client.on("message", message => {
     });
 
 
-client.on('ready', () => {
-  wait(1000);
-
-  client.guilds.forEach(g => {
-    g.fetchInvites().then(guildInvites => {
-      invites[g.id] = guildInvites;
-    });
-  });
+client.on("message", message => {
+        var prefix = "-";// البرفكس
+    if(message.content.startsWith(prefix + "setwlc")) {
+        let args = message.mentions.channels.first();
+            if(!args) message.channel.send("** منشن روم . :x:**").then(m => {    
+m.delete(1500);
+})
+                if(!message.guild.member(message.author.id).hasPermission("MANAGE_CHANNELS")) return message.channel.send("**ليس لديك صلاحيات . :x:**");
+                        message.channel.send(`**${args}. لقد تم شغل الروم هذا للترحيب.**`);
+                    client.on("guildMemberAdd", (member) => {
+                            if(member.user.bot) return;
+                         var embed = new Discord.RichEmbed()
+    .setAuthor(member.user.username, member.user.avatarURL)
+    .setThumbnail(member.user.avatarURL)
+    .setTitle('New Member')
+    .setDescription('Welcome To Server')
+    .addField('**ID Member:',"" +  member.user.id, true)
+    .addField('**Tage Member:', member.user.discriminator, true)
+    .addField('Created At Member', member.user.createdAt, true)
+    .addField(' :bust_in_silhouette:  Your Number',`**[ ${member.guild.memberCount} ]**`,true)
+    .setColor('GREEN')
+    .setFooter(member.guild.name, member.guild.iconURL, true)
+                         
+   args.send({embed : embed});
+                    });
+    }
 });
-
-client.on('guildMemberAdd', member => {
-  member.guild.fetchInvites().then(guildInvites => {
-    const ei = invites[member.guild.id];
-    invites[member.guild.id] = guildInvites;
-    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
-    const inviter = client.users.get(invite.inviter.id);
-    const logChannel = member.guild.channels.find(channel => channel.name === "soft");
-    logChannel.send(`Invited by: <@${inviter.id}>`);
-  });
-});
-
 
 client.on('message', message => {
         if (message.content.startWith(prefix + "unban all")){
@@ -1269,5 +1273,29 @@ client.on('message', message => {
 }
 });
 
-
+client.on("message", message => {
+        var prefix = "-";//البرفكس
+    if(message.content.startsWith(prefix + "setout")) {
+        let args = message.mentions.channels.first();
+            if(!args) message.channel.send("** منشن روم . :x:**");
+                if(!message.guild.member(message.author.id).hasPermission("MANAGE_CHANNELS")) return message.channel.send("**ليس لديك صلاحيات . :x:**");
+                        message.channel.send(`**${args}. لقد تم شغل الروم هذا للترحيب.**`);
+                    client.on("guildMemberRemove", (member) => {
+                            if(member.user.bot) return;
+                         var embed = new Discord.RichEmbed()
+    .setAuthor(member.user.username, member.user.avatarURL)
+  .setThumbnail(member.user.avatarURL)
+  .setTitle('Out Member')
+  .setDescription('GoodBye')
+  .addField('**ID Member:',"" +  member.user.id, true)
+    .addField('**Tage Member:', member.user.discriminator, true)
+    .addField('Created At Member', member.user.createdAt, true)
+    .addField(' :bust_in_silhouette:  Your Number',`**[ ${member.guild.memberCount} ]**`,true)
+    .setColor('RED')
+  .setFooter(member.guild.name, member.guild.iconURL, true)
+                         
+   args.send({embed : embed});
+                    });
+    }
+});
 client.login(process.env.BOT_TOKEN);
