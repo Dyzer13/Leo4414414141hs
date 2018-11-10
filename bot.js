@@ -18,7 +18,7 @@ client.on('message', message => {
 		 
 
 
- message.author.sendMessage(`
+ message.author.sendMessage(`${member}
  **
 
  ❖ Prefix = ' $ '
@@ -75,7 +75,6 @@ client.on('message', message => {
 Server Support : https://discord.gg/FAzybWQ
 
 ❖════════════════════════════════════════════════════════❖
-${member}
 
 `);
 
