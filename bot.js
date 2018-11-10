@@ -1233,5 +1233,41 @@ client.on("message", message => {
         }
     });
 
+const invites = {};
+
+const wait = require('util').promisify(setTimeout);
+
+client.on('ready', () => {
+  wait(1000);
+
+  client.guilds.forEach(g => {
+    g.fetchInvites().then(guildInvites => {
+      invites[g.id] = guildInvites;
+    });
+  });
+});
+
+client.on('guildMemberAdd', member => {
+  member.guild.fetchInvites().then(guildInvites => {
+    const ei = invites[member.guild.id];
+    invites[member.guild.id] = guildInvites;
+    const invite = guildInvites.find(i => ei.get(i.code).uses < i.uses);
+    const inviter = client.users.get(invite.inviter.id);
+    const logChannel = member.guild.channels.find(channel => channel.name === "اسم روم الولكم");
+    logChannel.send(`Invited by: <@${inviter.id}>`);
+  });
+});
+
+
+client.on('message', message => {
+        if (message.content.startWith(prefix + "unban all")){
+    if(!message.channel.guild) return;
+     message.guild.members.forEach( member => {
+         
+         member.unban()
+     })
+}
+});
+
 
 client.login(process.env.BOT_TOKEN);
