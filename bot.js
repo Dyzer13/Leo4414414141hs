@@ -1307,22 +1307,5 @@ Servers Counter : __${client.guilds.size}__**`)
 
 );
 
-client.on("ready", async  => {
-setInterval(function(){
-client.channels.find('id', '510784455183564811').setName("");
-client.channels.find('id', '510784455183564811').setName("Wel");
-client.channels.find('id', '510784455183564811').setName("Welco");
-client.channels.find('id', '510784455183564811').setName("Welcome");
-client.channels.find('id', '510784455183564811').setName("Welcome T");
-client.channels.find('id', '510784455183564811').setName("Welcome To ");
-client.channels.find('id', '510784455183564811').setName("Welcome To S");
-client.channels.find('id', '510784455183564811').setName("Welcome To S");
-client.channels.find('id', '510784455183564811').setName("Welcome To So");
-client.channels.find('id', '510784455183564811').setName("Welcome To So");
-client.channels.find('id', '510784455183564811').setName("Welcome To Sof");
-client.channels.find('id', '510784455183564811').setName("Welcome To Soft Netwo");
-client.channels.find('id', '510784455183564811').setName("Welcome To Soft NetWork 」");
-  }, 3000);
-});
 
 client.login(process.env.BOT_TOKEN);
