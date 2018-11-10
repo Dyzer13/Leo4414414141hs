@@ -18,7 +18,7 @@ client.on('message', message => {
 		 
 
 
- message.author.sendMessage(`${member}
+ message.author.sendMessage(`
  **
 
  ❖ Prefix = ' $ '
