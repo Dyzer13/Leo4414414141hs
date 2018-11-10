@@ -30,78 +30,6 @@ client.on('guildCreate', guild => {
 
 
 
-   client.on('message', msg => {
-  //Code By : ‡ ♪ ℬℐℓѦℓ✋ ‡#2026
-  if(msg.content.startsWith('.suggest')) {
-    if(!msg.channel.guild) return msg.reply('** هاذا الامر فقط للسيرفرات**');
-    if(!msg.guild.channels.find('name', 'suggestions')) return msg.reply('**الرجاء إضافة روم بإسم (suggestions)**');
-    let args = msg.content.split(" ").slice(1);
-    if(!args[1]) return msg.reply(`**الرجاء كتابة اقتراح**`)
-    //غيره على حسب اسم روم الاقتراحات او سوي مثل اسم الروم الموجود هنا
-    if(msg.guild.channels.find('name', 'suggestions')) {
-      //غيره هنا كمان اذا غيرت فوق
-      msg.guild.channels.find('name', 'suggestions').send(`
-    **New Suggestion By** : ${msg.member}
-
-      **The Suggestion** :
-      ${args.join(" ").split(msg.mentions.members.first()).slice(' ')}
-      `)
-      .then(function (message) {
-        message.react('✅')
-        message.react('❌')
-      })
-      }
-    }
-
-});
-
-
-
-
-client.on('message', message => {
-            if(!message.channel.guild) return;
-let args = message.content.split(' ').slice(1).join(' ');
-if (message.content.startsWith('.bcall')){
- if (message.author.id !== '506996140898648074') return message.reply('** هذا الأمر قفط لصاحب البوت و شكراًً **')
- if(!message.author.id === '506996140898648074') return;
-message.channel.sendMessage('جار ارسال الرسالة ✅')
-client.users.forEach(m =>{
-m.sendMessage(args)
-})
-}
-});
-
- 
-client.on("message", message => {
- if (message.content === ".support") {
-  const embed = new Discord.RichEmbed()
-      .setColor("RANDOM")
-      .setFooter('.SoftNetwork')
-      .addField('سيرفر الدعم الفني', `https://discord.gg/5qxe8Kv`)
-  message.author.send({embed});
-      message.channel.send(":white_check_mark: Check Your DM تم الأرسال بلخاص")
- }
-});
-
-
-
-
-
-client.on("message", message => {
-    if (!message.content.startsWith(prefix)) return;
-      let command = message.content.split(" ")[0];
-      command = command.slice(prefix.length);
-        if(command === "mcskin") {
-                const args = message.content.split(" ").slice(1).join(" ")
-        if (!args) return message.channel.send("** اكتب اسم اسكنك **");
-        const image = new Discord.Attachment(`https://minotar.net/armor/body/${args}`, "skin.png");
-    message.channel.send(image)
-        }
-    });
-
-
-
-
 client.on('guildCreate', guild => {
     
   client.channels.get("510761434838335498")
@@ -140,36 +68,6 @@ https://discordapp.com/api/oauth2/authorize?client_id=505134285918044163&permiss
 });
 
 
-
-client.login(process.env.BOT_TOKEN);
-
-
-        limit: 1,
-        type: 22
-      })
-      .then(audit => {
-        let exec = audit.entries.map(a => a.executor.username);
-        try {
-          let log = guild.channels.find('name', 'Logs');
-          if (!log) return;
-          client.fetchUser(member.id).then(myUser => {
-          let embed = new Discord.RichEmbed()
-        .setAuthor(exec)
-        .setThumbnail(myUser.avatarURL)
-        .addField('- Banned User:',`**${myUser.username}**`,true)
-        .addField('- Banned By:',`**${exec}**`,true)
-        .setFooter(myUser.username,myUser.avatarURL)
-            .setTimestamp();
-          log.send(embed).catch(e => {
-            console.log(e);
-          });
-          });
-        } catch (e) {
-          console.log(e);
-        }
-      });
-  }, 1000);
-});
 
  client.on('guildMemberRemove', member => {
     if (!member || !member.id || !member.guild) return;
