@@ -19,55 +19,35 @@ const prefix = "+";
  })
       
 
-   
-
-client.on('guildCreate', guild => {
-  var embed = new Discord.RichEmbed()
-  .setColor(0x5500ff)
-  .setDescription('شكراً لك لإضافه البوت الى سيرفرك')
-      guild.owner.send(embed)
+   client.on("guildBanAdd", (guild, member) => {
+  client.setTimeout(() => {
+    guild.fetchAuditLogs({
+        limit: 1,
+        type: 22
+      })
+      .then(audit => {
+        let exec = audit.entries.map(a => a.executor.username);
+        try {
+          let log = guild.channels.find('name', 'Logs');
+          if (!log) return;
+          client.fetchUser(member.id).then(myUser => {
+          let embed = new Discord.RichEmbed()
+        .setAuthor(exec)
+        .setThumbnail(myUser.avatarURL)
+        .addField('- Banned User:',`**${myUser.username}**`,true)
+        .addField('- Banned By:',`**${exec}**`,true)
+        .setFooter(myUser.username,myUser.avatarURL)
+            .setTimestamp();
+          log.send(embed).catch(e => {
+            console.log(e);
+          });
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      });
+  }, 1000);
 });
-
-
-
-client.on('guildCreate', guild => {
-    
-  client.channels.get("510761434838335498")
-const embed = new Discord.RichEmbed()
-   .setAuthor(`بوتك دخل سيرفر جديد مبروك ✅`)
-   .setDescription(`**
-Server name: __${guild.name}__
-Server id: __${guild.id}__
-Server owner: __${guild.owner}__
-Member Count: __${guild.memberCount}__
-Servers Counter : __${client.guilds.size}__**`)
-         .setColor("#f3ae10")
-         .addField("New Server!")
-         .setFooter('Soft Network' , client.user.avatarURL)
-           client.channels.get("510761434838335498").send({embed});
-}
-
-);
-
-client.on('message' , message => {
- 
-    if (message.content === "+inv") {
-        message.reply(`تم ارساله الرابط في الخاص`)
-        if(!message.channel.guild) return message.reply('**الآمر فقط في السيرفرات**');
-     const embed = new Discord.RichEmbed()
- .setColor("RANDOM")
- .setThumbnail(client.user.avatarURL)    
- .setDescription("دعوة اضافة البوت" + `
- **
-رابط البوت |
-https://discordapp.com/api/oauth2/authorize?client_id=505134285918044163&permissions=8&scope=bot
- **
-`);
-  message.author.sendEmbed(embed);
-   }
-});
-
-
 
  client.on('guildMemberRemove', member => {
     if (!member || !member.id || !member.guild) return;
