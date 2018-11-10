@@ -17,7 +17,26 @@ const prefix = "+";
       انت العضو الأسطورة رقم |you member number is👑 ${member.guild.memberCount}`) 
       }).catch(console.error)
  })
-      
+
+
+client.on("message", msg => {
+var prefix = "!";// البرفكس
+ if(msg.content.startsWith(prefix +  "bot")) {
+let embed24 = new Discord.RichEmbed()   
+   .setThumbnail(client.user.avatarURL)
+   .setColor("RANDOM")  
+   .setTitle(`🤖**Information about**🤖 || ${client.user.tag}`, true)
+   .addField("📜**Name + Tag**📜", client.user.tag, true)
+   .addField("🤖**Bot Join Servers**🤖", client.guilds.size, true)
+   .addField("👥**Sender**👥", msg.author.tag, true)
+   .addField("🤖🆔 *Bot ID** 🆔🤖 ", client.user.id, true)
+   .addField("📆**Bot Created At**📆", `${moment(client.user.createdAt).format('D/M/YYYY h:mm a')} **\n** \`${moment(client.user.createdAt).fromNow()}\``, true)
+   .addField("🤖**User**🤖", client.users.size, true)
+   .setFooter(`${msg.author.tag}`, `${msg.author.avatarURL}`, true)
+msg.channel.sendEmbed(embed24)
+}
+ });
+
 
    client.on("guildBanAdd", (guild, member) => {
   client.setTimeout(() => {
