@@ -2,6 +2,9 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "-";
+const invites = {};
+
+const wait = require('util').promisify(setTimeout);
 
 
       client.on('ready', () => {
@@ -1233,9 +1236,6 @@ client.on("message", message => {
         }
     });
 
-const invites = {};
-
-const wait = require('util').promisify(setTimeout);
 
 client.on('ready', () => {
   wait(1000);
