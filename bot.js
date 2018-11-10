@@ -19,30 +19,6 @@ const prefix = "+";
  })
 
 
-client.on('message', message => {
-    if (message.content.includes('discord.gg')){
-                        if(!message.channel.guild) return message.reply ('')
-                    if (!message.member.hasPermissions(['MANAGE_MESSAGES'])){
-       message.channel.send('#mute <@' + message.author.id + '> 1h')
-       message.delete() 
-       }
-    }
-          if (message.content.startsWith("mute ")) {
-             if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply();
-             var member= message.mentions.members.first();
-             member.ban().then((member) => {
-                 message.channel.sendMessage("", {embed: {
-                 author: {
-                 },
-                 title: 'بسبب النشر ' + member.displayName + ' تم اعطائك ميوت',
-                 color: 490101,
-                 }
-               });
-           }
-         ) 
-       }
-   });
-
 
    client.on("guildBanAdd", (guild, member) => {
   client.setTimeout(() => {
