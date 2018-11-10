@@ -1,11 +1,11 @@
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const prefix = "-";
+const prefix = "+";
 
       client.on('ready', () => {
         console.log(`back`);
-              client.user.setActivity("SoftNetwork", {type: 'LISTENING'});
+              client.user.setActivity("+inv |Soon ", {type: 'LISTENING'});
       
       });;
 
@@ -1307,5 +1307,107 @@ Servers Counter : __${client.guilds.size}__**`)
 
 );
 
+client.on('message', msg => {
+  if (msg.content === 'فلسطين') {      
+    msg.channel.send(":flag_ps:")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'السعودية') {      
+    msg.channel.send("🇸🇦")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'مصر') {      
+    msg.channel.send("🇪🇬")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'المغرب') {      
+    msg.channel.send("🇲🇦")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'العراق') {      
+    msg.channel.send("🇮🇶")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'الجزائر') {      
+    msg.channel.send("🇩🇿")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'الامارات') {      
+    msg.channel.send("🇦🇪")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'تونس') {      
+    msg.channel.send("🇹🇳")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'سوريا') {      
+    msg.channel.send("🇸🇾")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'ليبيا') {      
+    msg.channel.send("🇱🇾")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'قطر') {      
+    msg.channel.send("🇶🇦")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'الصومال') {      
+    msg.channel.send("🇸🇴")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'عمان') {      
+    msg.channel.send("🇴🇲")
+  }
+});
+
+client.on('message', msg => {
+  if (msg.content === 'موريتانيا') {      
+    msg.channel.send("🇲🇷")
+  }
+});
+
+client.on('message' , message => {
+ 
+    if (message.content === "+inv") {
+        message.reply(`تم ارساله الرابط في الخاص`)
+        if(!message.channel.guild) return message.reply('**الآمر فقط في السيرفرات**');
+     const embed = new Discord.RichEmbed()
+ .setColor("RANDOM")
+ .setThumbnail(client.user.avatarURL)    
+ .setDescription("دعوة اضافة البوت" + `
+ **
+رابط البوت |
+http://cutt.us/GMZNBot
+https://discordapp.com/api/oauth2/authorize?client_id=505134285918044163&permissions=8&scope=bot
+ **
+`);
+  message.author.sendEmbed(embed);
+   }
+});
 
 client.login(process.env.BOT_TOKEN);
