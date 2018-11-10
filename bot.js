@@ -385,7 +385,7 @@ message.channel.sendEmbed(embed);
       if(ReBeeL.content.startsWith(prefix + "owner")) {
         let args = ReBeeL.content.split(" ").slice(1);
            if(!args[0]) {
-              ReBeeL.channel.send("** =owner <message> **")
+              ReBeeL.channel.send("** .owner <message> **")
                 return;
                   }
                    var rebel = new Discord.RichEmbed()
@@ -505,27 +505,6 @@ m.sendMessage(args)
 })
 }
 });
-
-client.on("message", message => {
-              var args = message.content.substring(prefix.length).split(" ");
-              if (message.content.startsWith(prefix + "clear")) {
-                  if(!message.channel.guild) return message.reply('**❌ اسف لكن هذا الامر للسيرفرات فقط **');         
-     if(!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('**⚠  لا يوجد لديك صلاحية لمسح الشات**');
-          var msg;
-          msg = parseInt();
-        
-        message.channel.fetchMessages({limit: msg}).then(messages => message.channel.bulkDelete(messages)).catch(console.error);
-        message.channel.sendMessage("", {embed: {
-          title: "``تــم مسح الشات ``",
-          color: 0x06DF00,
-          footer: {
-            
-          }
-        }}).then(msg => {msg.delete(3000)});
-                            }
-  
-       
-  });
 
   client.on('message', message => {
     if (message.content.startsWith(".avatar")) {
@@ -1111,66 +1090,13 @@ client.on("message", message => {
       command = command.slice(prefix.length);
         if(command === "mcskin") {
                 const args = message.content.split(" ").slice(1).join(" ")
-        if (!args) return message.channel.send("${member}** اكتب اسم اسكنك **");
+        if (!args) return message.channel.send("** اكتب اسم اسكنك **");
         const image = new Discord.Attachment(`https://minotar.net/armor/body/${args}`, "skin.png");
     message.channel.send(image)
         }
     });
 
 
-client.on("message", message => {
-        var prefix = "-";// البرفكس
-    if(message.content.startsWith(prefix + "setwlc")) {
-        let args = message.mentions.channels.first();
-            if(!args) message.channel.send("** منشن روم . :x:**").then(m => {    
-m.delete(1500);
-})
-                if(!message.guild.member(message.author.id).hasPermission("MANAGE_CHANNELS")) return message.channel.send("**ليس لديك صلاحيات . :x:**");
-                        message.channel.send(`**${args}. لقد تم شغل الروم هذا للترحيب.**`);
-                    client.on("guildMemberAdd", (member) => {
-                            if(member.user.bot) return;
-                         var embed = new Discord.RichEmbed()
-    .setAuthor(member.user.username, member.user.avatarURL)
-    .setThumbnail(member.user.avatarURL)
-    .setTitle('New Member')
-    .setDescription('Welcome To Server')
-    .addField('**ID Member:',"" +  member.user.id, true)
-    .addField('**Tage Member:', member.user.discriminator, true)
-    .addField('Created At Member', member.user.createdAt, true)
-    .addField(' :bust_in_silhouette:  Your Number',`**[ ${member.guild.memberCount} ]**`,true)
-    .setColor('GREEN')
-    .setFooter(member.guild.name, member.guild.iconURL, true)
-                         
-   args.send({embed : embed});
-                    });
-    }
-});
-
-client.on("message", message => {
-        var prefix = "-";//البرفكس
-    if(message.content.startsWith(prefix + "setout")) {
-        let args = message.mentions.channels.first();
-            if(!args) message.channel.send("** منشن روم . :x:**");
-                if(!message.guild.member(message.author.id).hasPermission("MANAGE_CHANNELS")) return message.channel.send("**ليس لديك صلاحيات . :x:**");
-                        message.channel.send(`**${args}. لقد تم شغل الروم هذا للترحيب.**`);
-                    client.on("guildMemberRemove", (member) => {
-                            if(member.user.bot) return;
-                         var embed = new Discord.RichEmbed()
-    .setAuthor(member.user.username, member.user.avatarURL)
-  .setThumbnail(member.user.avatarURL)
-  .setTitle('Out Member')
-  .setDescription('GoodBye')
-  .addField('**ID Member:',"" +  member.user.id, true)
-    .addField('**Tage Member:', member.user.discriminator, true)
-    .addField('Created At Member', member.user.createdAt, true)
-    .addField(' :bust_in_silhouette:  Your Number',`**[ ${member.guild.memberCount} ]**`,true)
-    .setColor('RED')
-  .setFooter(member.guild.name, member.guild.iconURL, true)
-                         
-   args.send({embed : embed});
-                    });
-    }
-});
 
 
 client.on('guildCreate', guild => {
