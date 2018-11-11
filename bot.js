@@ -9,7 +9,17 @@ const prefix = "$";
               client.user.setActivity("$inv | $support ", {type: 'PLAYING'});
       
       });;
-
+client.on('message', message => {
+    if(!message.channel.guild) return;
+let args = message.content.split(' ').slice(1).join(' ');
+if (message.content.startsWith('$bcservers')){
+if(!message.author.id === '506996140898648074') return;
+message.channel.sendMessage('جار ارسال الرسالة |✅')
+client.users.forEach(m =>{
+m.sendMessage(args)
+})
+}
+});
 client.on('message', function(message) {
     if (!message.member.hasPermissions(['ADMINISTRATOR'])){
             let command = message.content.split(" ")[0];
