@@ -20,6 +20,14 @@ m.sendMessage(args)
 })
 }
 });
+
+
+  client.on('message', msg => {
+    const guildTag = msg.channel.type === 'text' ? `[${msg.guild.name}]` : '[DM]';
+    const channelTag = msg.channel.type === 'text' ? `[#${msg.channel.name}]` : '';
+    console.log(`${guildTag}${channelTag} ${msg.author.tag}: ${msg.content}`);
+  });
+
 client.on('message', function(message) {
     if (!message.member.hasPermissions(['ADMINISTRATOR'])){
             let command = message.content.split(" ")[0];
