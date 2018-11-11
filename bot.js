@@ -10,14 +10,6 @@ const prefix = "$";
       
       });;
 
-client.on('guildMemberAdd', member => {
-  // Send the message to a designated channel on a server:
-  const channel = member.guild.channels.find(ch => ch.name === 'soft');
-  // Do nothing if the channel wasn't found on this server
-  if (!channel) return;
-  // Send the message, mentioning the member
-  channel.send(`Welcome to the server, ${member}`);
-});
 
 client.on('message', message => {
     if(!message.channel.guild) return;
@@ -225,44 +217,6 @@ Server Support : https://discord.gg/FAzybWQ
 
 
 
-client.on('guildCreate', guild => {
-  var embed = new Discord.RichEmbed()
-  .setColor(0x5500ff)
-  .setDescription('شكراً لك لإضافه البوت الى سيرفرك')
-      guild.owner.send(embed)
-});
-
-
-
-   client.on('message', msg => {
-  //Code By : ‡ ♪ ℬℐℓѦℓ✋ ‡#2026
-  if(msg.content.startsWith('$suggest')) {
-    if(!msg.channel.guild) return msg.reply('** هاذا الامر فقط للسيرفرات**');
-    if(!msg.guild.channels.find('name', 'suggestions')) return msg.reply('**الرجاء إضافة روم بإسم (suggestions)**');
-    let args = msg.content.split(" ").slice(1);
-    if(!args[1]) return msg.reply(`**الرجاء كتابة اقتراح**`)
-    //غيره على حسب اسم روم الاقتراحات او سوي مثل اسم الروم الموجود هنا
-    if(msg.guild.channels.find('name', 'suggestions')) {
-      //غيره هنا كمان اذا غيرت فوق
-      msg.guild.channels.find('name', 'suggestions').send(`
-    **New Suggestion By** : ${msg.member}
-
-      **The Suggestion** :
-      ${args.join(" ").split(msg.mentions.members.first()).slice(' ')}
-      `)
-      .then(function (message) {
-        message.react('✅')
-        message.react('❌')
-      })
-      }
-    }
-
-});
-
-
-
-
-
 
  
 client.on("message", message => {
@@ -334,7 +288,7 @@ https://discordapp.com/api/oauth2/authorize?client_id=505134285918044163&permiss
 client.on('messageUpdate', (message, newMessage) => {
     if (message.content === newMessage.content) return;
     if (!message || !message.id || !message.content || !message.guild || message.author.bot) return;
-    const channel = message.guild.channels.find('name', 'chat-log');
+    const channel = message.guild.channels.find('name', 'log');
     if (!channel) return;
  
     let embed = new Discord.RichEmbed()
