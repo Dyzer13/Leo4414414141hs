@@ -21,7 +21,14 @@ m.sendMessage(args)
 }
 });
 
-
+// Create an event listener for messages
+client.on('message', message => {
+  // If the message is " $avatar"
+  if (message.content === ' $avatar') {
+    // Send the user's avatar URL
+    message.reply(message.author.avatarURL);
+  }
+});
   client.on('message', msg => {
     const guildTag = msg.channel.type === 'text' ? `[${msg.guild.name}]` : '[DM]';
     const channelTag = msg.channel.type === 'text' ? `[#${msg.channel.name}]` : '';
