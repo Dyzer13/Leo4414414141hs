@@ -32,19 +32,39 @@ client.on('message', message => {
             .setThumbnail(client.user.avatarURL)
             .setColor('RANDOM')
             .setTitle('Info QueenBot.')
-            .addField('``My Ping``' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
+            .addField('``Ping``' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
             .addField('``RAM Usage``', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true)
             .addField('``servers``', [client.guilds.size], true)
             .addField('``channels``' , `[ ${client.channels.size} ]` , true)
             .addField('``Users``' ,`[ ${client.users.size} ]` , true)
-            .addField('``My Name``' , `[ ${client.user.tag} ]` , true)
-            .addField('``My ID``' , `[ ${client.user.id} ]` , true)
+            .addField('``Name``' , `[ ${client.user.tag} ]` , true)
+            .addField('``ID``' , `[ ${client.user.id} ]` , true)
                   .addField('``My Prefix``' , `[ $ ]` , true)
                   .addField('``My Language``' , `[ Java Script ]` , true)
-                  .setFooter('By Void جميع الحقوق محفوظه لسيرفر الفا كودز')
+                  .setFooter('Soft Network')
     })
 }
 });
+
+client.on('message', function(msg) {
+    if(msg.content.startsWith (prefix  + 'server')) {
+      let embed = new Discord.RichEmbed()
+      .setColor('RANDOM')
+      .setThumbnail(msg.guild.iconURL)
+      .setTitle(`Showing Details Of  **${msg.guild.name}*`)
+      .addField('🌐** نوع السيرفر**',`[** __${msg.guild.region}__ **]`,true)
+      .addField('🏅** الرتب**',`[** __${msg.guild.roles.size}__ **]`,true)
+      .addField('🔴**عدد الاعضاء**',`[** __${msg.guild.memberCount}__ **]`,true)
+      .addField('🔵**عدد الاعضاء الاونلاين**',`[** __${msg.guild.members.filter(m=>m.presence.status == 'online').size}__ **]`,true)
+      .addField('📝**الرومات الكتابية**',`[** __${msg.guild.channels.filter(m => m.type === 'text').size}__** ]`,true)
+      .addField('🎤**رومات الصوتيه**',`[** __${msg.guild.channels.filter(m => m.type === 'voice').size}__ **]`,true)
+      .addField('👑**الأونـر*',`**${msg.guild.owner}**`,true)
+      .addField('🆔**ايدي السيرفر**',`**${msg.guild.id}**`,true)
+      .addField('📅**تم عمل السيرفر في**',msg.guild.createdAt.toLocaleString())
+      msg.channel.send({embed:embed});
+    }
+  });
+
 
 client.on('message', message => {
     if(!message.channel.guild) return;
