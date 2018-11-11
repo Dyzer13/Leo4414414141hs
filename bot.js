@@ -5,9 +5,6 @@ const prefix = "$";
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
-              client.user.setActivity("$inv | $support ", {type: 'PLAYING'});
-      
-      });;
 
 client.on('message', message => {
     let args = message.content.split(' ').slice(1);
