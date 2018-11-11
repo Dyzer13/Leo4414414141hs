@@ -46,24 +46,6 @@ client.on('message', message => {
 }
 });
 
-client.on('message', function(msg) {
-    if(msg.content.startsWith (prefix  + 'server')) {
-      let embed = new Discord.RichEmbed()
-      .setColor('RANDOM')
-      .setThumbnail(msg.guild.iconURL)
-      .setTitle(`Showing Details Of  **${msg.guild.name}*`)
-      .addField('🌐** نوع السيرفر**',`[** __${msg.guild.region}__ **]`,true)
-      .addField('🏅** الرتب**',`[** __${msg.guild.roles.size}__ **]`,true)
-      .addField('🔴**عدد الاعضاء**',`[** __${msg.guild.memberCount}__ **]`,true)
-      .addField('🔵**عدد الاعضاء الاونلاين**',`[** __${msg.guild.members.filter(m=>m.presence.status == 'online').size}__ **]`,true)
-      .addField('📝**الرومات الكتابية**',`[** __${msg.guild.channels.filter(m => m.type === 'text').size}__** ]`,true)
-      .addField('🎤**رومات الصوتيه**',`[** __${msg.guild.channels.filter(m => m.type === 'voice').size}__ **]`,true)
-      .addField('👑**الأونـر**',`**${msg.guild.owner}**`,true)
-      .addField('🆔**ايدي السيرفر**',`**${msg.guild.id}**`,true)
-      .addField('📅**تم عمل السيرفر في**',msg.guild.createdAt.toLocaleString())
-      msg.channel.send({embed:embed});
-    }
-  });
 
 
 client.on('message', message => {
