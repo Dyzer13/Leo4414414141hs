@@ -6,7 +6,7 @@ const prefix = "$";
  
       client.on('ready', () => {
         console.log(`back`);
-              client.user.setActivity("$inv | update ", {type: 'LISTENING'});
+              client.user.setActivity("$inv | $support ", {type: 'LISTENING'});
       
       });;
 
