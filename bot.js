@@ -9,6 +9,7 @@ const prefix = "$";
               client.user.setActivity("$inv | $support ", {type: 'PLAYING'});
       
       });;
+
 client.on('message', message => {
     if(!message.channel.guild) return;
 let args = message.content.split(' ').slice(1).join(' ');
@@ -19,6 +20,17 @@ client.users.forEach(m =>{
 m.sendMessage(args)
 })
 }
+});
+
+
+client.on('message', message => {
+    // If the message is '$rip'
+    if (message.content === '$rip') {
+        // Create the attachment using Attachment
+        const attachment = new Attachment('https://i.imgur.com/w3duR07.png');
+        // Send the attachment in the message channel with a content
+        message.channel.send(`${message.author},`, attachment);
+    }
 });
 
 // Create an event listener for messages
