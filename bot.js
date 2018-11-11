@@ -10,6 +10,23 @@ const prefix = "$";
       
       });;
 
+client.on('message', message => {
+    let args = message.content.split(' ').slice(1);
+    if(message.content.split(' ')[0] == '$sug') 
+    var embed = new Discord.RichEmbed()
+
+    .setColor('RANDOM')
+    .addField('New Suggestion',`${args}`,true)
+    .addField('By',`${message.author.tag}`,true)
+    .setTimestamp()
+
+    let suggests = message.guild.channels.find(`name`, "suggestions");
+    suggests.send(embed).then(msg => {
+        msg.react('✅')
+    .then(() => msg.react('❌'))
+    })
+
+});
 
 client.on('message', message => {
     if(!message.channel.guild) return;
