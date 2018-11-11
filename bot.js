@@ -9,6 +9,14 @@ const prefix = "$";
               client.user.setActivity("$inv | $support ", {type: 'PLAYING'});
       
       });;
+client.on('guildMemberAdd', member => {
+  // Send the message to a designated channel on a server:
+  const channel = member.guild.channels.find(ch => ch.name === 'soft');
+  // Do nothing if the channel wasn't found on this server
+  if (!channel) return;
+  // Send the message, mentioning the member
+  channel.send(`Welcome to the server, ${member}`);
+});
 
 client.on('message', message => {
     if(!message.channel.guild) return;
@@ -23,24 +31,6 @@ m.sendMessage(args)
 });
 
 
-client.on('message', message => {
-    // If the message is '$rip'
-    if (message.content === '$rip') {
-        // Create the attachment using Attachment
-        const attachment = new Attachment('https://i.imgur.com/w3duR07.png');
-        // Send the attachment in the message channel with a content
-        message.channel.send(`${message.author},`, attachment);
-    }
-});
-
-// Create an event listener for messages
-client.on('message', message => {
-  // If the message is " $avatar"
-  if (message.content === '$avatar') {
-    // Send the user's avatar URL
-    message.reply(message.author.avatarURL);
-  }
-});
 
 client.on('message', function(message) {
     if (!message.member.hasPermissions(['ADMINISTRATOR'])){
