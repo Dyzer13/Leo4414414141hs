@@ -9,6 +9,7 @@ const prefix = "$";
               client.user.setActivity("$inv | $support ", {type: 'PLAYING'});
       
       });;
+
 client.on('guildMemberAdd', member => {
   // Send the message to a designated channel on a server:
   const channel = member.guild.channels.find(ch => ch.name === 'soft');
