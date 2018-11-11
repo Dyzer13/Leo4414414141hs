@@ -131,18 +131,7 @@ client.on('guildCreate', guild => {
 
 
 
-client.on('message', message => {
-            if(!message.channel.guild) return;
-let args = message.content.split(' ').slice(1).join(' ');
-if (message.content.startsWith('.bcall')){
- if (message.author.id !== '506996140898648074') return message.reply('** هذا الأمر قفط لصاحب البوت و شكراًً **')
- if(!message.author.id === '506996140898648074') return;
-message.channel.sendMessage('جار ارسال الرسالة ✅')
-client.users.forEach(m =>{
-m.sendMessage(args)
-})
-}
-});
+
 
  
 client.on("message", message => {
@@ -793,34 +782,7 @@ client.on('message', message => {
   });
 
 
-    client.on('message', message => { //  by [ <@480407581085532180> ]
-
-    if(message.content.startsWith(prefix + 'move all')) {
-
-     if (!message.member.hasPermission("MOVE_MEMBERS")) return message.channel.send('**لايوجد لديك صلاحية سحب الأعضاء**');
-
-     if(!message.guild.member(client.user).hasPermission("MOVE_MEMBERS")) return message.reply("**لايوجد لدي صلاحية السحب**");
-
-    if (message.member.voiceChannel == null) return message.channel.send(`**الرجاء الدخول لروم صوتي**`)
-
-     var author = message.member.voiceChannelID;
-
-     var m = message.guild.members.filter(m=>m.voiceChannel)
-
-     message.guild.members.filter(m=>m.voiceChannel).forEach(m => {
-
-     m.setVoiceChannel(author)
-
-     })
-
-     message.channel.send(`**تم سحب جميع الأعضاء الي الروم الصوتي حقك.**`)
-
-
-
-     }
-
-     });
-
+   
 
 
 
