@@ -875,7 +875,16 @@ const slowmode_attachments = new Map();
 const ratelimit = 7500; // within 7.5 seconds
 const logChannel = "510412901178146817"; // logs channel id
  
+ client.on("message", message => {
  
+    if (message.content.startsWith("!ping")) {
+        let startTime = Date.now();
+        message.channel.send("Ping...").then(newMessage => {
+            let endTime = Date.now();
+            newMessage.edit("Pong! Took `" + Math.round(endTime - startTime) + "ms`!");
+        });
+    }
+	 
     function log(logmessage) {
         if (message.guild.channels.has(logChannel)) {
             message.guild.channels.get(logChannel).send({ embed: logmessage}).then().catch(err => console.log(err));
