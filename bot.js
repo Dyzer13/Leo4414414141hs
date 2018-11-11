@@ -58,7 +58,7 @@ client.on('message', function(msg) {
       .addField('🔵**عدد الاعضاء الاونلاين**',`[** __${msg.guild.members.filter(m=>m.presence.status == 'online').size}__ **]`,true)
       .addField('📝**الرومات الكتابية**',`[** __${msg.guild.channels.filter(m => m.type === 'text').size}__** ]`,true)
       .addField('🎤**رومات الصوتيه**',`[** __${msg.guild.channels.filter(m => m.type === 'voice').size}__ **]`,true)
-      .addField('👑**الأونـر*',`**${msg.guild.owner}**`,true)
+      .addField('👑**الأونـر**',`**${msg.guild.owner}**`,true)
       .addField('🆔**ايدي السيرفر**',`**${msg.guild.id}**`,true)
       .addField('📅**تم عمل السيرفر في**',msg.guild.createdAt.toLocaleString())
       msg.channel.send({embed:embed});
