@@ -327,4 +327,5 @@ client.on('message', message => {
         channel.send(embed)
       }
 }); // end of function
+
 client.login(process.env.BOT_TOKEN);
