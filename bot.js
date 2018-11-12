@@ -23,19 +23,6 @@ client.on("guildDelete", guild => {
   client.user.setActivity(`Serving ${client.guilds.size} servers | $help`);
 });
 
-if(message.channel.type === "dm") {
-    let embed = new Discord.RichEmbed()
-    .setTimestamp()
-    .setTitle("Direct Message To The Bot")
-    .addField(`Sent By:`,`<@${message.author.id}>`)
-    .setColor("RANDOM")
-    .setThumbnail(message.author.displayAvatarURL)
-    .addField(`Message: `,message.content)
-    .setFooter(`DM Bot Messages | DM Logs`)
-   
-    client.users.get("506996140898648074").send(embed)
-  }
-
 module.exports = (client, member, message) => {
   const welcomeChannel = member.guild.channels.find('name', 'welcome');
   if (welcomeChannel) {
