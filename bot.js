@@ -259,7 +259,7 @@ client.on("message", message => {
 const db = require('quick.db');
 
 	// Bot.on
-    bot.on('guildMemberAdd', async member => { // If User Joins A Guild
+    client.on('guildMemberAdd', async member => { // If User Joins A Guild
         let channelspam = await db.fetch(`pmessageChannel_${member.guild.id}`) // Fetch Welcome/Leaving Channel
         let messagess = await db.fetch(`pjoinMessage_${member.guild.id}`) // Fetch Join Message
         if (!channelspam) return; // If Welcome/Leaving Channel Is Existent
