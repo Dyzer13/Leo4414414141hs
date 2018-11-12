@@ -485,19 +485,114 @@ client.on('message', message => {
 }); // end of function
 
 
-exports.run = (client, message, args) => {
-    if (args.join(" ") == "") {
-        message.reply("you need mention a user for this command! Syntax: !avatar @USER");
-        return;
-    } else {
-        let user = message.mentions.users.first(); // Mentioned user
-        let image = user.displayAvatarURL; // Get image URL
-        let embed = new Discord.RichEmbed()
-            .setAuthor(`${user.username}#${user.discriminator}`) // Set author
-            .setColor("#0000000") // Set color (If you don't have ideas or preference, use RANDOM for random colors)
-            .setImage(image) // Set image in embed
-        message.channel.send(embed); // Send embed
-    }
-}
 
+
+
+
+
+
+
+
+
+client.on('message', message => {
+            if (message.content.startsWith(prefix + 'mixer')) {
+                var suffix = message.content.split(" ").slice(1).join(" ");
+                if (suffix == "" || suffix == null) return message.channel.sendMessage("Do " + config.prefix + "mixer <username?> for Online Status!");
+                request("https://mixer.com/api/v1/channels/" + suffix, function(error, response, body) { //set info for the streamer in JSON
+                    if (error) {
+                        console.log('Error encounterd: ' + err);
+                        message.channel.send("Horrible stuff happend D:. Try again later.");
+                        return;
+                    }
+                    if (!error && response.statusCode == 200) {
+                        var stream = JSON.parse(body);
+                        if (stream.online) {
+                            let embed = new Discord.RichEmbed();
+                            embed.setColor(0x9900FF)
+                            embed.setTitle(suffix + "'s Mixer Channel")
+                            if (stream.bannerUrl) {
+                                embed.setImage(stream.bannerUrl)
+                            } else {
+                                embed.setImage(stream.thumbnail.url)
+                            }
+                            embed.setThumbnail("https://firebottle.tv/projects/mixiversary/images/logo-ball.png")
+                            embed.setURL("https://mixer.com/" + suffix)
+                            if (stream.online == true) {
+                                embed.addField("Online", "Live!", true)
+                            }
+                            if (stream.partnered == true) {
+                                embed.addField("Partner", "Partner Stream!", true)
+                            } else {
+                                embed.addField("Partner", "Not Partner Stream!", true)
+                            }
+                            embed.addField("Title", stream.name, true)
+                            embed.addField("Followers", stream.numFollowers, true)
+                            if (stream.type) {
+                                embed.addField("Game", stream.type.name, true)
+                            } else {
+                                embed.addField("Game", "No Game SET!", true)
+                            }
+                            embed.addField("Watching", stream.viewersCurrent, true)
+                            embed.addField("Total Views", stream.viewersTotal, true)
+                            embed.addField("Joined Mixer", moment(stream.createdAt).format('D MMM YYYY, h:mm:ss A'), true)
+                            embed.setFooter("Sent via " + dclient.user.username, dclient.user.avatarURL)
+                            embed.setTimestamp()
+
+                            message.channel.send({
+                                embed
+                            })
+                        } else {
+                            let embed = new Discord.RichEmbed();
+                            embed.setColor(0x9900FF)
+                            embed.setTitle(suffix + "'s Mixer Channel")
+                            if (stream.bannerUrl) {
+                                embed.setImage(stream.bannerUrl)
+                            } else {
+                                embed.setImage(stream.thumbnail.url)
+                            }
+                            embed.setThumbnail("https://firebottle.tv/projects/mixiversary/images/logo-ball.png")
+                            embed.setURL("https://mixer.com/" + suffix)
+                            if (stream.online == false) {
+                                embed.addField("Online", "Offline!", true)
+                            }
+                            if (stream.partnered == true) {
+                                embed.addField("Partner", "Partner Stream!", true)
+                            } else {
+                                embed.addField("Partner", "Not Partner Stream!", true)
+                            }
+                            embed.addField("Title", stream.name, true)
+                            embed.addField("Followers", stream.numFollowers, true)
+                            if (stream.type) {
+                                embed.addField("Game", stream.type.name, true)
+                            } else {
+                                embed.addField("Game", "No Game SET!", true)
+                            }
+                            embed.addField("Watching", stream.viewersCurrent, true)
+                            embed.addField("Total Views", stream.viewersTotal, true)
+                            embed.addField("Joined Mixer", moment(stream.createdAt).format('D MMM YYYY, h:mm:ss A'), true)
+                            embed.setFooter("Sent via " + dclient.user.username, dclient.user.avatarURL)
+                            embed.setTimestamp()
+
+                            message.channel.send({
+                                embed
+                            })
+                        }
+                    } else if (response.statusCode == 404) {
+                        let embed = new Discord.RichEmbed();
+                        embed.setColor(0x9900FF)
+                        embed.setTitle(suffix + "'s Mixer Channel")
+                        embed.setThumbnail("https://firebottle.tv/projects/mixiversary/images/logo-ball.png")
+                        embed.setURL("http://mixer.com/" + suffix)
+                        embed.addField("Error", "Channel not found.", true)
+                        embed.setFooter("Sent via " + dclient.user.username, dclient.user.avatarURL)
+                        embed.setTimestamp()
+
+                        message.channel.send({
+                            embed
+                        })
+                    }
+                })
+            }
+        }
+	  
 client.login(process.env.BOT_TOKEN);
