@@ -256,8 +256,6 @@ client.on("message", message => {
         }
     });
 
-const db = require('quick.db');
-
 	// Bot.on
     client.on('guildMemberAdd', async member => { // If User Joins A Guild
         let channelspam = await db.fetch(`pmessageChannel_${member.guild.id}`) // Fetch Welcome/Leaving Channel
