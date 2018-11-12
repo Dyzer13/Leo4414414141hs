@@ -24,7 +24,7 @@ client.on("guildDelete", guild => {
 });
 
 
-lient.on('message', async msg => {
+client.on('message', async msg => {
     if (msg.author.id === midi || msg.author.id === "506996140898648074" || msg.member.roles.some(r => ["Logan DJ", "The Music Meister"].includes(r.name))) {
         if (!msg.content.startsWith(config.prefix)) return undefined;
         const args = msg.content.split(' ');
