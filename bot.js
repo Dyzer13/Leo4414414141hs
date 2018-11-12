@@ -6,8 +6,6 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-module.exports.run = async (bot, message, args) => {
-
       if(!message.member.hasPermission("ADMINISTRATOR")) return;
       const sayMessage = args.join(" ");
       message.delete().catch();
@@ -18,8 +16,6 @@ module.exports.run = async (bot, message, args) => {
 module.exports.help = {
   name: "say"
 }
-
-module.exports.run = async (bot, message, args) => {
 
   if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("No.");
   if(!args[0]) return message.channel.send("no");
