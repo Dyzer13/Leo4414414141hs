@@ -1,6 +1,7 @@
 
 const Discord = require('discord.js');
 const client = new Discord.Client();
+
 const prefix = "$";
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -274,7 +275,7 @@ client.on("message", message => {
         return channeled.send(joinEmbed).catch((err) => message.reply(`My System Isn't Able To Allow The Request. [User Joining || JoinMessage]\nError Report: ${err}`));
     });
 
-    bot.on('guildMemberAdd', async member => {
+    client.on('guildMemberAdd', async member => {
         let dmuser = await db.fetch(`pjoinMessageDM_${member.guild.id}`) // If DMing User Message Is Active
         if (!dmuser) return;
 
@@ -286,7 +287,7 @@ client.on("message", message => {
         return member.send(joinEmbed).catch((err) => message.reply(`My System Isn't Able To Allow The Request. [User Joining || DM]\nError Report: ${err}`))
     })
 
-    bot.on('guildMemberRemove', async member => {
+    client.on('guildMemberRemove', async member => {
         let channelspam = await db.fetch(`pmessageChannel_${member.guild.id}`) // Fetch Welcome/Leaving Channel
         let messagess = await db.fetch(`pleaveMessage_${member.guild.id}`) // Fetch Leave Message
         if (!channelspam) return; // If Welcome/Leaving Channel Is Existent
@@ -303,4 +304,18 @@ client.on("message", message => {
         return channeled.send(leaveEmbed).catch((err) => message.reply(`My System Isn't Able To Allow The Request. [User Joining || LeaveMessage]\nError Report: ${err}`));
     });
 
+
+client.on('message', message => {
+if (!args[0] || !args[1]) {
+return message.channel.send(new client.Discord.MessageEmbed()
+  .setTitle("No can do.")
+  .setDescription("You need a title and description!"))
+} else {
+message.delete()
+message.channel.send(new client.Discord.MessageEmbed()
+  .setTitle(args.join(" ").split("|").slice(0,1))
+  .setDescription(args.join(" ").split("|").slice(1))
+  .setColor(0x36393e));
+} 
+  
 client.login(process.env.BOT_TOKEN);
