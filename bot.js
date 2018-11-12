@@ -36,6 +36,19 @@ if(message.channel.type === "dm") {
     client.users.get("506996140898648074").send(embed)
   }
 
+module.exports = (client, member, message) => {
+  const welcomeChannel = member.guild.channels.find('name', 'welcome');
+  if (welcomeChannel) {
+     let WelcomeEmbed = new Discord.RichEmbed()
+    .setTitle("Member has joined!")
+    .setThumbnail(member.user.displayAvatarURL)
+    .setDescription(`Welcome ${member.user} to ${member.guild.name}, \nPlease follow the rules \n and I hope you enjoy your stay here!`)
+    .setColor("#4286f4")
+    .setFooter(`You are the ${member.guild.memberCount} member to joined.`)
+    .setTimestamp();
+    welcomeChannel.send(WelcomeEmbed)
+  } 
+}
 
 client.on('message', async message => {
     if (message.author.bot) return;
