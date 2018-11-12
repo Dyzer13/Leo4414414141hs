@@ -23,19 +23,28 @@ client.on("guildDelete", guild => {
   client.user.setActivity(`Serving ${client.guilds.size} servers | $help`);
 });
 
-module.exports = (client, member, message) => {
-  const welcomeChannel = member.guild.channels.find('name', 'welcome');
-  if (welcomeChannel) {
-     let WelcomeEmbed = new Discord.RichEmbed()
-    .setTitle("Member has joined!")
-    .setThumbnail(member.user.displayAvatarURL)
-    .setDescription(`Welcome ${member.user} to ${member.guild.name}, \nPlease follow the rules \n and I hope you enjoy your stay here!`)
-    .setColor("#4286f4")
-    .setFooter(`You are the ${member.guild.memberCount} member to joined.`)
-    .setTimestamp();
-    welcomeChannel.send(WelcomeEmbed)
-  } 
-}
+
+client.on("channelCreate", async channel => {
+	var logs = channel.guild.channels.find(c => c.name === 'logs');
+	if (!logs) return console.log("Can't find logs channel.");
+	const cembed = new Discord.RichEmbed()
+		.setTitle("Channel Created")
+		.setColor("RANDOM")
+		.setDescription(`A **${channel.type} channel**, by the name of **${channel.name}**, was just created!`)
+		.setTimestamp(new Date());
+	logs.send(cembed)
+});
+
+client.on("channelDelete", async channel => {
+	var logs = channel.guild.channels.find(c => c.name === 'logs');
+	if (!logs) return console.log("Can't find logs channel.");
+	const cembed = new Discord.RichEmbed()
+		.setTitle("Channel Deleted")
+		.setColor("RANDOM")
+		.setDescription(`A **${channel.type} channel**, by the name of **${channel.name}**, was just deleted!`)
+		.setTimestamp(new Date())
+	logs.send(cembed)
+});
 
 client.on('message', async message => {
     if (message.author.bot) return;
