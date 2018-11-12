@@ -250,11 +250,59 @@ client.on("message", message => {
       command = command.slice(prefix.length);
         if(command === "skin") {
                 const args = message.content.split(" ").slice(1).join(" ")
-        if (!args) return message.channel.send(`${member} اكتب اسم اسكنك`);
+        if (!args) return message.channel.send(` اكتب اسم اسكنك`);
         const image = new Discord.Attachment(`https://minotar.net/armor/body/${args}`, "skin.png");
     message.channel.send(image)
         }
     });
 
+const db = require('quick.db');
+
+	// Bot.on
+    bot.on('guildMemberAdd', async member => { // If User Joins A Guild
+        let channelspam = await db.fetch(`pmessageChannel_${member.guild.id}`) // Fetch Welcome/Leaving Channel
+        let messagess = await db.fetch(`pjoinMessage_${member.guild.id}`) // Fetch Join Message
+        if (!channelspam) return; // If Welcome/Leaving Channel Is Existent
+        if (!messagess) return // If The Join Message Is Existent
+
+        if (!member.guild.channels.get(channelspam)) return // If Channel Welcome/Leave Exists Within Guild As A Channel
+        let channeled = member.guild.channels.get(channelspam) // Grabs Channel ID Enabling Input Of Server
+
+        var joinEmbed = new Discord.RichEmbed()
+            .setColor('00FF00')
+            .setDescription(`${messagess.replace('{user}', member).replace('{members}', member.guild.memberCount)}`) // Adding .replace('{user}', member) will be if a someone uses {user} in there welcome message it'll prompt the user joining.
+            .setFooter(`Welcome To The Server - Respect The Rules & Staff`) // Feel Free To Customise You Bildge Rats >:D
+            .setTimestamp()
+        return channeled.send(joinEmbed).catch((err) => message.reply(`My System Isn't Able To Allow The Request. [User Joining || JoinMessage]\nError Report: ${err}`));
+    });
+
+    bot.on('guildMemberAdd', async member => {
+        let dmuser = await db.fetch(`pjoinMessageDM_${member.guild.id}`) // If DMing User Message Is Active
+        if (!dmuser) return;
+
+        var joinEmbed = new Discord.RichEmbed()
+            .setColor('00FF00')
+            .setDescription(`${dmuser.replace('{user}', member).replace('{members}', member.guild.memberCount)}`) // Adding .replace('{user}', member) will be if a someone uses {user} in there welcome message it'll prompt the user joining.
+            .setFooter(`Welcome To The Server ${member.guild.name} - Respect The Rules & Staff`) // Feel Free To Customise You Bildge Rats >:D
+            .setTimestamp()
+        return member.send(joinEmbed).catch((err) => message.reply(`My System Isn't Able To Allow The Request. [User Joining || DM]\nError Report: ${err}`))
+    })
+
+    bot.on('guildMemberRemove', async member => {
+        let channelspam = await db.fetch(`pmessageChannel_${member.guild.id}`) // Fetch Welcome/Leaving Channel
+        let messagess = await db.fetch(`pleaveMessage_${member.guild.id}`) // Fetch Leave Message
+        if (!channelspam) return; // If Welcome/Leaving Channel Is Existent
+        if (!messagess) return // If The Leave Message Is Existent
+
+        if (!member.guild.channels.get(channelspam)) return
+        let channeled = member.guild.channels.get(channelspam)
+
+        var leaveEmbed = new Discord.RichEmbed()
+            .setColor('#FF0000')
+            .setDescription(`${messagess.replace('{user}', member).replace('{members}', member.guild.memberCount)}`) // Adding .replace('{user}', member) will be if a someone uses {user} in there welcome message it'll prompt the user joining.
+            .setFooter(`Someone Deserted Us.. He Is A Lone Wanderer`) // Feel Free To Customise You Bildge Rats >:D
+            .setTimestamp()
+        return channeled.send(leaveEmbed).catch((err) => message.reply(`My System Isn't Able To Allow The Request. [User Joining || LeaveMessage]\nError Report: ${err}`));
+    });
 
 client.login(process.env.BOT_TOKEN);
