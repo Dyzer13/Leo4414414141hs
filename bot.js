@@ -304,18 +304,5 @@ client.on("message", message => {
         return channeled.send(leaveEmbed).catch((err) => message.reply(`My System Isn't Able To Allow The Request. [User Joining || LeaveMessage]\nError Report: ${err}`));
     });
 
-
-client.on('message', message => {
-if (!args[0] || !args[1]) {
-return message.channel.send(new client.Discord.MessageEmbed()
-  .setTitle("No can do.")
-  .setDescription("You need a title and description!"))
-} else {
-message.delete()
-message.channel.send(new client.Discord.MessageEmbed()
-  .setTitle(args.join(" ").split("|").slice(0,1))
-  .setDescription(args.join(" ").split("|").slice(1))
-  .setColor(0x36393e));
-} 
   
 client.login(process.env.BOT_TOKEN);
