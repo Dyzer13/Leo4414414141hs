@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
-const db = require('quick.db');
-const giphy = require('giphy-api')();    
+const db = require('quick.db');  
 const googl = require('goo.gl');  
 const translate = require('google-translate-api');   
 const fs = require("fs"); 
