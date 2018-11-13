@@ -30,7 +30,7 @@ client.on("guildDelete", guild => {
                       client.on("guildMemberAdd", (member) => {
                         console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
                             let log = message.guild.channels.find(`name`, "logs");
-                            if(!log) return message.reply("510412901178146817"); //Returns with message if channel not found
+                            if(!log) return message.reply("511687369456353300"); //Returns with message if channel not found
                             log.send(`Welcome ${member}`)
                     });
 
