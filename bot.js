@@ -8,6 +8,7 @@ client.on("ready", () => {
   // Example of changing the bot's playing game to something useful. `client.user` is what the
   // docs refer to as the "ClientUser".
   client.user.setActivity(`Serving ${client.guilds.size} servers | $help`);
+  client.user.setStatus('dnd')
 });
 
 client.on("guildCreate", guild => {
