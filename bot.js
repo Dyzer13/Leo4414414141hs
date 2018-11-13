@@ -605,6 +605,25 @@ client.on('message', msg => {
 
 
 
+client.on('messageUpdate', (oldMessage, newMessage) => {
+    let logsChannel = newMessage.guild.channels.find('name', 'message-edits');
+    if (newMessage.channel === logsChannel){ return; }
+      const embed = new Discord.RichEmbed()
+      .setColor(0xbf42f4)
+      .setAuthor(newMessage.author.tag, newMessage.author.avatarURL)
+      .setTitle('Message Edited In ' + '#' + newMessage.channel.name + '.')
+      .addField('**Original Message:**', oldMessage)
+      .addField('**Edited Message:**', newMessage)
+      .setTimestamp()
+    logsChannel.send(embed);
+  });
+
+
+
+
+
+
+
 
 
 
