@@ -581,7 +581,6 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 
 
 
-client.on("guildMemberAdd", (member) => {
     if (msg.startsWith(prefix + 'PURGE')) {
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Get your permissions first!");
      
@@ -594,7 +593,6 @@ client.on("guildMemberAdd", (member) => {
      
        });
        }
-})
    
 
 
