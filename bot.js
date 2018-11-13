@@ -543,21 +543,30 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 
 });
 	
-client.on('message' , message => {
-    let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
-    if(message.content.startsWith(prefix + 'unban')) {
-        if(!user) return  message.channel.send(`Do this ${prefix} <@ID user> \n or \n ${prefix}unban ID user`);
-        message.guild.unban(user);
-        message.guild.owner.send(`لقد تم فك الباند عن الشخص \n ${user} \n By : <@${message.author.id}>`)
-        var embed = new Discord.RichEmbed()
-        .setThumbnail(message.author.avatarURl)
-        .setColor("RANDOM")
-        .setTitle('**●Unban** !')
-        .addField('**●User Unban :** ', `${user}` , true)
-        .addField('**●By :**' ,       ` <@${message.author.id}> ` , true)
-        .setAuthor(message.guild.name)
-        message.channel.sendEmbed(embed)
-    }
+client.on('message',async message => {
+  if(message.author.bot || message.channel.type === prefix +'bc') return;
+  let args = message.content.split(' ');
+  if(args[0] === `${prefix}bc`) {
+    if(!message.member.hasPermission("MANAGE_GUILD")) return message.channel.send('- **أنت لا تملك الصلاحيات اللازمة لأستخدام هذا الأمر**');
+    if(!args[1]) return message.channel.send('- **يجب عليك كتابة الرسالة بعد الأمر**');
+  
+    let msgCount = 0;
+    let errorCount = 0;
+    let successCount = 0;
+    message.channel.send(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`).then(msg => {
+      message.guild.members.forEach(g => {
+        g.send(args.slice(1).join(' ')).then(() => {
+          successCount++;
+          msgCount++;
+          msg.edit(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`);
+        }).catch(e => {
+          errorCount++;
+          msgCount++;
+          msg.edit(`**- [ :bookmark: :: ${msgCount} ] ・عدد الرسائل المرسلة**\n**- [ :inbox_tray: :: ${successCount} ] ・عدد الرسائل المستلمة**\n**- [ :outbox_tray: :: ${errorCount} ]・عدد الرسائل الغير مستلمة**`);
+        });
+      });
+    });
+  }
 });
 
 
