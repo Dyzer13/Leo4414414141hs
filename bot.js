@@ -156,7 +156,7 @@ client.on('message', message => {
  message.author.sendMessage(`
  **
 
- ``Prefix = ' $ ``
+ Prefix = ' $ 
 
 
  ❖ $kick <mention > ➾ لطرد شخص 
