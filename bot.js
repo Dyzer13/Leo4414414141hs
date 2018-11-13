@@ -585,7 +585,21 @@ client.on('message', msg => {
 
 
 
-
+                        bot.on(`message`, async message => {
+                          if(message.content === prefix + "reboot") { 
+                        if (message.author.id === "505134285918044163") {
+                          message.channel.send(":gear: Reload in process")
+                          
+                          bot.destroy()
+                          bot.login(process.env.TOKEN)
+                        message.channel.send(":gear: Reload has been done")
+                        } else {
+                          
+                        message.channel.send("Only the Owner of this bot can do that !")
+                          
+                          }
+                          }
+                        });
 
 			  
 			  
