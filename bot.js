@@ -36,10 +36,6 @@ client.on("guildDelete", guild => {
 
 
 
-  client.on("guildMemberAdd", (member) => {
-console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
- let log = message.guild.channels.find(`name`, "welcome");  //Finds channel "logs"
-                    });
 
 
 
