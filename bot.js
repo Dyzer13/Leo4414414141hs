@@ -558,7 +558,18 @@ client.on('message', msg => {
 			  
 			  
 			  	  
-			  
+			                          client.on('message' , message => {
+ 
+                            if (message.content === prefix +"inv") {
+                                message.reply(`link has been sent`)
+                                if(!message.channel.guild) return message.reply('Only command servers');
+                             const embed = new Discord.RichEmbed()
+                         .setColor("RANDOM")
+                         .setThumbnail(client.user.avatarURL)    
+                         .setDescription("invite add bot" + `https://discordapp.com/api/oauth2/authorize?client_id=505134285918044163&permissions=8&scope=bot`);
+                          message.author.sendEmbed(embed);
+                           }
+                        });
 			  
 			  
 			  
