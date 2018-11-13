@@ -583,21 +583,6 @@ client.on('messageUpdate', (message) => {
 
 
 
- if (msg.startsWith(prefix + 'clear')) {
-    
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("No")
- 
-     if(!args[0]) return message.channel.send("Please provide a number.");
-     if(args[2]) return message.channel.send(" \`\`\`A unknown error has occured\`\`\`")
- 
-    message.channel.bulkDelete(args[0]).then(() => {
- 
-     message.channel.send(`Cleared ${args[0]} messages.`).then(msg => msg.delete(5000));
-    }
-   });
-
-
-
 
 
 
@@ -608,8 +593,8 @@ client.on(`message`, async message => {
                         if (message.author.id === "506996140898648074") {
                           message.channel.send(":gear: Reload in process")
                           
-                          bot.destroy()
-                          bot.login(process.env.TOKEN)
+                          client.destroy()
+                          client.login(process.env.TOKEN)
                         message.channel.send(":gear: Reload has been done")
                         } else {
                           
@@ -619,10 +604,13 @@ client.on(`message`, async message => {
                           }
                         });
 
-			  
-			  
-			  
-			client.on("message", message => {
+
+
+
+
+
+
+client.on("message", message => {
  if (msg.startsWith(prefix + 'purge')) {
     
     if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("No")
@@ -632,7 +620,10 @@ client.on(`message`, async message => {
  
     message.channel.bulkDelete(args[0]).then(() => {
  
-     message.channel.send(`Cleared ${args[0]} messages.`).then(msg => msg.delete(5000));                                                                                                                                               });    
-			  
+     message.channel.send(`Cleared ${args[0]} messages.`).then(msg => msg.delete(5000));       
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                          });
+});    
+	
+	
 			  
 client.login(process.env.BOT_TOKEN);
