@@ -38,13 +38,3 @@
   "engines": {
     "node": "8.x"
   },
-  "repository": {
-    "url": ""
-  },
-  "license": "MIT",
-  "keywords": [
-    "node",
-    "glitch",
-    "express"
-  ]
-}
