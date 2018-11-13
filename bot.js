@@ -585,7 +585,7 @@ client.on('message', msg => {
 
 
 
-                        bot.on(`message`, async message => {
+client.on(`message`, async message => {
                           if(message.content === prefix + "reboot") { 
                         if (message.author.id === "505134285918044163") {
                           message.channel.send(":gear: Reload in process")
