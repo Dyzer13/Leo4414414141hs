@@ -156,60 +156,33 @@ client.on('message', message => {
  message.author.sendMessage(`
  **
 
- ❖ Prefix = ' $ '
+ ``Prefix = ' $ ``
 
 
-❖════════════❖ Admin Commands ❖════════════❖
-
- ❖ $kick <mention > ➾ لطرد شخص(soon)
-
- ❖ $clear ➾ لمسح الرسائل(soon)
- 
- ❖ $mute < mention > ➾ لأعطاء شخص ميوت(soon)
-
- ❖ $unmute <mention> ➾ لفك الميوت عن شخص(soon)
+ ❖ $kick <mention > ➾ لطرد شخص 
 
  ❖ $ct <name> ➾ لأنشاء روم كتابي(soon)
 
  ❖ $cv <name> لأنشاء روم صوتي(soon)
 
- ❖ $bc <message> ➾ لأرسال رسالة لجميع الأعضاء على الخاص(soon)
+ ❖ $bc <message> ➾ لأرسال رسالة لجميع الأعضاء على الخاص
 
- ❖ $warn <mention> <reason> ➾ لأعطاء انذار او تحذير لشخص(soon)
-
- ❖ $rbc <mentionrole><message> ➾ لأرسال رسالة لجميع الأعضاء الي معهم الرتبة على الخاص(soon)
+ ❖ $warn <mention> <reason> ➾ لأعطاء انذار او تحذير لشخص
 
 
-❖════════════❖ General  Commands ❖════════════❖
-
-
-❖ +member ➾ لمعرفة الأعضاء الموجودة في السيرفر
+❖ +skin ➾ لروءيات سكنك في ماين كرافت
 
 ❖ +uptime ➾ لمعرفة البوت كم صار له اونلاين
 
-❖ $own ➾  (soon) لمعرفة من الأونر مالت البوت
+❖ $id ➾   لروئية الأيدي التك
 
-❖ $id ➾ (soon) لروئية الأيدي التك
+❖ $avatar ➾ HD لروئية صورة حسابك
 
-❖ $avatar ➾ (soon) لروئية صورة حسابك
-
-❖ $ping ➾ (soon) لروئية بينق البوت
-
-❖ $bot ➾ (soon) معلومات عن البوت
-
-❖ $server ➾ (soon) معلومات السيرفر
+❖ $bot ➾   معلومات عن البوت
 
 ❖ $inv ➾ لدعوة البوت الى سيرفرك
 
-
-❖════════════❖ Welcome ❖════════════❖
-
-
-❖══════════════════════❖ Welcome ❖═══════════════════════❖
-
-Server Support : https://discord.gg/FAzybWQ
-
-❖════════════════════════════════════════════════════════❖
+❖ $support ➾ سيرفر الدعم الفني
 
 `);
 
@@ -568,8 +541,129 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 
 
 
+});
+	
+client.on('message' , message => {
+    let user = message.mentions.users.first()|| client.users.get(message.content.split(' ')[1])
+    if(message.content.startsWith(prefix + 'unban')) {
+        if(!user) return  message.channel.send(`Do this ${prefix} <@ID user> \n or \n ${prefix}unban ID user`);
+        message.guild.unban(user);
+        message.guild.owner.send(`لقد تم فك الباند عن الشخص \n ${user} \n By : <@${message.author.id}>`)
+        var embed = new Discord.RichEmbed()
+        .setThumbnail(message.author.avatarURl)
+        .setColor("RANDOM")
+        .setTitle('**●Unban** !')
+        .addField('**●User Unban :** ', `${user}` , true)
+        .addField('**●By :**' ,       ` <@${message.author.id}> ` , true)
+        .setAuthor(message.guild.name)
+        message.channel.sendEmbed(embed)
+    }
+});
 
-	
-	
+                      client.on('message', async message => {
+                        let args = message.content.split(" ");
+                        if(message.content.startsWith(prefix + "mute")) {
+                          if(!message.member.hasPermission("MANAGE_ROLES")) return message.reply('You do not have the necessary properties. A property must be available `Manage Roles`').then(msg => {
+                            msg.delete(3500);
+                            message.delete(3500);
+                          });
+                      
+                          if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply('**I do not have enough characteristics. The `Manage Roles` properties are required to do this').then(msg => {
+                            msg.delete(3500);
+                            message.delete(3500);
+                          });
+                      
+                          let mention = message.mentions.members.first();
+                          if(!mention) return message.reply('Menchen member to silence (give the mute) ').then(msg => {
+                            msg.delete(3500);
+                            message.delete(3500);
+                          });
+                      
+                          if(mention.highestRole.position >= message.guild.member(message.author).highestRole.positon) return message.reply('You can not give Mute to Someone whose rank is higher than you').then(msg => {
+                            msg.delete(3500);
+                            message.delete(3500);
+                          });
+                          if(mention.highestRole.positon >= message.guild.member(client.user).highestRole.positon) return message.reply('**لا يمكنني اعطاء ميوت لشخص رتبته اعلى مني**').then(msg => {
+                            msg.delete(3500);
+                            message.delete(3500);
+                          });
+                          if(mention.id === message.author.id) return message.reply('You can not give Mute to yourself').then(msg => {
+                            msg.delete(3500);
+                            message.delete(3500);
+                          });
+                      
+                          let duration = args[2];
+                          if(!duration) return message.reply('Select a time-out to Mute the person').then(msg => {
+                            msg.delete(3500);
+                            message.delete(3500);
+                          });
+                      
+                          if(isNaN(duration)) return message.reply('Select a correct time interval').then(msg => {
+                            msg.delete(3500);
+                            message.delete(3500);
+                          });
+                      
+                          let reason = message.content.split(" ").slice(3).join(" ");
+                          if(!reason) reason = "undefined";
+                      
+                          let thisEmbed = new Discord.RichEmbed()
+                          .setAuthor(mention.user.username, mention.user.avatarURL)
+                          .setTitle('Muted was given in server')
+                          .setThumbnail(mention.user.avatarURL)
+                          .addField('# - Server',message.guild.name,true)
+                          .addField('# - Mute was given by',message.author,true)
+                          .addField('# - Reason',reason)
+                      
+                          let role = message.guild.roles.find('name', 'Muted') || message.guild.roles.get(r => r.name === 'Muted');
+                          if(!role) try {
+                            message.guild.createRole({
+                              name: "Muted",
+                              permissions: 0
+                            }).then(r => {
+                              message.guild.channels.forEach(c => {
+                                c.overwritePermissions(r , {
+                                  SEND_MESSAGES: false,
+                                  READ_MESSAGES_HISTORY: false,
+                                  ADD_REACTIONS: false
+                                });
+                              });
+                            });
+                          } catch(e) {
+                            console.log(e.stack);
+                          }
+                          mention.addRole(role).then(() => {
+                            mention.send(thisEmbed);
+                            message.channel.send(`:white_check_mark: ${mention.user.username} muted in the server ! :zipper_mouth:    `);
+                            mention.setMute(true);
+                          });
+                          setTimeout(() => {
+                            if(duration === 0) return;
+                            mention.setMute(false);
+                            mention.removeRole(role);
+                            message.channel.send(`:white_check_mark: ${mention.user.username} unmuted in the server ! :neutral_face:    `);
+                          },duration * 60000);
+                        } else if(message.content.startsWith(prefix + "unmute")) {
+                          let mention = message.mentions.members.first();
+                          let role = message.guild.roles.find('name', 'Muted') || message.guild.roles.get(r => r.name === 'Muted');
+                          if(!message.member.hasPermission("MANAGE_ROLES")) return message.reply('You do not have the necessary properties. A property must be available `Manage Roles`').then(msg => {
+                            msg.delete(3500);
+                            message.delete(3500);
+                          });
+                      
+                          if(!message.guild.member(client.user).hasPermission("MANAGE_ROLES")) return message.reply('I do not have enough characteristics. The `Manage Roles` properties are required to do this').then(msg => {
+                            msg.delete(3500);
+                            message.delete(3500);
+                          });
+                      
+                          if(!mention) return message.reply('The person mens to break Mute about him').then(msg => {
+                            msg.delete(3500);
+                            message.delete(3500);
+                          });
+                      
+                            mention.removeRole(role);
+                            mention.setMute(false);
+                            message.channel.send(`:white_check_mark: ${mention.user.username} unmuted in the server ! :neutral_face:    `);
+                        }
+                      });
 			  
 client.login(process.env.BOT_TOKEN);
