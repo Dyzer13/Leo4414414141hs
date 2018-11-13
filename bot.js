@@ -582,8 +582,7 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 
 
 client.on("guildMemberAdd", (member) => {
-    if(command === "clear")  {
-    
+    if (msg.startsWith(prefix + 'PURGE')) {
         if(!message.member.hasPermission("MANAGE_MESSAGES")) return errors.noPerms(message, "MANAGE_MESSAGES");
      
          if(!args[0]) return message.channel.send("Please provide a number.");
