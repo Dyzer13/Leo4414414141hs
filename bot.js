@@ -583,7 +583,7 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
 
 client.on("guildMemberAdd", (member) => {
     if (msg.startsWith(prefix + 'PURGE')) {
-        if(!message.member.hasPermission("MANAGE_MESSAGES")) return errors.noPerms(message, "MANAGE_MESSAGES");
+    if(!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("Get your permissions first!");
      
          if(!args[0]) return message.channel.send("Please provide a number.");
          if(args[2]) return message.channel.send(" \`\`\`A unknown error has occured\`\`\`")
