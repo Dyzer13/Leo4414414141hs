@@ -26,25 +26,6 @@ client.on("guildDelete", guild => {
 });
 
 
-
-                      client.on("guildMemberAdd", (member) => {
-                        console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
-                            let log = message.guild.channels.find(`name`, "logs");
-                            if(!log) return message.reply("511687369456353300"); //Returns with message if channel not found
-                            log.send(`Welcome ${member}`)
-                    });
-
-
-
-
-
-
-
-
-
-
-
-
 client.on("channelCreate", async channel => {
 	var logs = channel.guild.channels.find(c => c.name === 'logs');
 	if (!logs) return console.log("Can't find logs channel.");
