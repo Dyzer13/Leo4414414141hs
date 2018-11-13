@@ -594,7 +594,13 @@ client.on('message', msg => {
                             }
                         });
 			  
-
+                          client.on('message', msg => {
+                            if (msg.content == prefix + 'floof') {
+                                require('request').get('https://api.tfdfurry.com/floof.json', (err, res, body) => {
+                                    msg.channel.send(new Discord.RichEmbed().setImage('https://' + JSON.parse(body).file))
+                                });
+                            }
+                        });
 
 
 
