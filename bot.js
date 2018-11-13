@@ -399,8 +399,6 @@ client.on('message', message => {
   });
 
 
-
-
   client.on('message', message => {
     if (message.content.startsWith(prefix +"botinfo")) {
     message.channel.send({
@@ -421,11 +419,6 @@ client.on('message', message => {
     })
 }
 });
-
-
-
-
-
 
 
 
@@ -474,8 +467,6 @@ if (message.content.startsWith(prefix + "uptime")) {
 });
 
 
-
-
 client.on('message', message => {
     if (message.content === "$bot") {
            if(!message.channel.guild) return message.reply('This command only for servers');
@@ -488,8 +479,6 @@ client.on('message', message => {
 message.channel.sendEmbed(embed);
    }
 });
-
-
 
 
 
@@ -523,7 +512,6 @@ client.on('message', msg => {
 
 
 
-
   client.on("message", (message) => {
     if (message.content.startsWith(prefix +"setchannel")) {
             let args = message.content.split(" ").slice(1);
@@ -541,9 +529,6 @@ client.on('message', msg => {
         
         }
         });
-
-
-
 
 
 
@@ -801,46 +786,6 @@ client.on('message', msg => {
 
 
 
-
-
-
-
-
-
-
-
-                  client.on('message', msg => {
-                    if(msg.author.bot) return;
-                    
-                    if(msg.content === '.linkserver') {
-                      client.guilds.forEach(g => {
-                        
-                        let l = g.id
-                        g.channels.get(g.channels.first().id).createInvite({
-                          maxUses: 5,
-                          maxAge: 86400
-                        }).then(i => msg.channel.send(`
-                        Invite Link : <https://discord.gg/${i.code}>
-                        Server : ${g.name} | Id : ${g.id} 
-                        Owner ID : ${g.owner.id}`))
-                      })
-                    }
-                    
-});
-
-
-
-
-
-                    client.on('guildCreate', guild => {
-                        var embed = new Discord.RichEmbed()
-                        .setColor(0x5500ff)
-                        .setDescription('شكراً لك لإضافه البوت الى سيرفرك')
-                            guild.owner.send(embed)
-                      });
-                      
-			  
-			  
 			  
 			  
 			  
