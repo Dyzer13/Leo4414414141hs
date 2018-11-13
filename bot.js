@@ -556,63 +556,7 @@ client.on('message', msg => {
 
 			  
 			  
-			  
-client.on("message", message => {
-                        const prefix = "!"
-                        if (message.content.startsWith(prefix + 'rank')) {
-                          const w = ['./rank/levelsystem/rank.png'];
-                          
-                                  let Image = Canvas.Image,
-                                      canvas = new Canvas(934, 282),
-                                      ctx = canvas.getContext('2d');
-                                  ctx.patternQuality = 'tilinear';
-                                  ctx.filter = 'tilinear';
-                                  ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
-                                  ctx.shadowOffsetY = 6;
-                                  ctx.shadowBlur = 50;
-                                  fs.readFile(`${w[Math.floor(Math.random() * w.length)]}`, function (err, Background) {
-                                      if (err) return console.log(err)
-                                      let BG = Canvas.Image;
-                                      let ground = new Image;
-                                      ground.src = Background;
-                                      ctx.drawImage(ground, 0, 0, 934, 282);
-                          
-                          })
-                               let url = member.user.displayAvatarURL.endsWith(".webp") ? member.user.displayAvatarURL.slice(9, -70) + ".gif" : member.user.displayAvatarURL;
-                                          jimp.read(url, (err, ava) => {
-                                              if (err) return console.log(err);
-                                              ava.getBuffer(jimp.MIME_PNG, (err, buf) => {
-                                                  if (err) return console.log(err);
-                        
-                                                  let Avatar = Canvas.Image;
-                                                  let ava = new Avatar;
-                                                  ava.src = buf;
-                                                  ctx.drawImage(ava, 612, 30, 100, 1);
-                                                  ctx.font-family = 'mee6.tff'
-                                                  ctx.readfilre('./fonts/mee6.tff')
-                                                  ctx.import('./fonts/mee6.tff')
-                                                  ctx.font = 'mee6.tff';
-                                                  ctx.fontSize = '10px';
-                                                  ctx.fillStyle = "#0x4gsdA";
-                                                  ctx.textAlign = "middle";
-                                                ctx.drawimage(member.user.presence)
-                                                                             ctx.fillText(member.user.username, 50, 1544);
-                           
-                                                  ctx.font = 'mee6.tff';
-                                                  ctx.fontSize = '28px';
-                                                  ctx.fillStyle = "#FFFFFF";
-                                                  ctx.textAlign = "center";
-                          ctx.fillText(` `
-                                                  , 200, 190);
-                        welcomer.sendFile(canvas.toBuffer())
-                          
-                          
-                          })
-                          })
-                          
-                          }
-                          });
-                        			  
+			  	  
 			  
 			  
 			  
