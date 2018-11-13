@@ -565,21 +565,12 @@ client.on('message', msg => {
                              const embed = new Discord.RichEmbed()
                          .setColor("RANDOM")
                          .setThumbnail(client.user.avatarURL)    
-                         .setDescription("invite add bot" + `| https://discordapp.com/api/oauth2/authorize?client_id=505134285918044163&permissions=8&scope=bot`);
+                         .setDescription("invite add bot " + `| https://discordapp.com/api/oauth2/authorize?client_id=505134285918044163&permissions=8&scope=bot`);
                           message.author.sendEmbed(embed);
                            }
                         });
 			  
 			  
-			  
-                          client.on('message', msg => {
-                            if (msg.content == prefix + 'floof') {
-                                require('request').get('https://api.tfdfurry.com/floof.json', (err, res, body) => {
-                                    msg.channel.send(new Discord.RichEmbed().setImage('https://' + JSON.parse(body).file))
-                                });
-                            }
-                        });
-
 
 
 
