@@ -145,49 +145,7 @@ client.on('message', message => {
   }
 });
 
-client.on('message', message => {
-    if (message.author.bot) return;
-     if (message.content === prefix + "help") {
-		 message.channel.send('**تم الأرسال في الخاص**');
-            
-	
 
-
- message.author.sendMessage(`
- **
-
- Prefix = ' $ 
-
-
- ❖ $kick <mention > ➾ لطرد شخص 
-
- ❖ $ct <name> ➾ لأنشاء روم كتابي(soon)
-
- ❖ $cv <name> لأنشاء روم صوتي(soon)
-
- ❖ $bc <message> ➾ لأرسال رسالة لجميع الأعضاء على الخاص
-
- ❖ $warn <mention> <reason> ➾ لأعطاء انذار او تحذير لشخص
-
-
-❖ +skin ➾ لروءيات سكنك في ماين كرافت
-
-❖ +uptime ➾ لمعرفة البوت كم صار له اونلاين
-
-❖ $id ➾   لروئية الأيدي التك
-
-❖ $avatar ➾ HD لروئية صورة حسابك
-
-❖ $bot ➾   معلومات عن البوت
-
-❖ $inv ➾ لدعوة البوت الى سيرفرك
-
-❖ $support ➾ سيرفر الدعم الفني
-
-`);
-
-    }
-});
   client.on("guildMemberAdd", member => {
            member.createDM().then(function (channel) {
                        return channel.send(`Welcome To Server 
