@@ -25,6 +25,8 @@ const pretty = require('pretty-ms')
 
 const client = new Discord.Client();
 
+
+
 const prefix = "$";
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
@@ -58,8 +60,12 @@ client.on("guildDelete", guild => {
 
 
 
-
-
+                      client.on("guildMemberAdd", (member) => {
+                        console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
+                            let log = message.guild.channels.find(`name`, "welcome");  //Finds channel "logs"
+                            if(!log) return message.reply("510412901178146817"); //Returns with message if channel not found
+                    log.send(`Welcome ${member}`}
+                    });
 
 
 
