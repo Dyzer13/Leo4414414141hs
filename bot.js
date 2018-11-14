@@ -357,21 +357,6 @@ if (message.content.startsWith(prefix + "uptime")) {
 });
 
 
-client.on('message', message => {
-    if (message.content === "$bot") {
-           if(!message.channel.guild) return message.reply('This command only for servers');
-    let embed = new Discord.RichEmbed()
- .setColor('RANDOM')
- .addField("The number of servers to which the bot:" , client.guilds.size)
- .addField("Users:", client.users.size)
- .addField("Channels:", client.channels.size)
- .setTimestamp()
-message.channel.sendEmbed(embed);
-   }
-});
-
-
-
 
 
 client.on('message', msg => {
