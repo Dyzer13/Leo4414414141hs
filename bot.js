@@ -1,6 +1,10 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = "$";
+
+
+
+
 client.on("ready", () => {
   // This event will run if the bot starts, and logs in, successfully.
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
@@ -44,6 +48,24 @@ client.on("channelDelete", async channel => {
 		.setTimestamp(new Date())
 	logs.send(cembed)
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -160,6 +182,18 @@ client.on("message", message => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 client.on("message", message => {
     if (!message.content.startsWith(prefix)) return;
       let command = message.content.split(" ")[0];
@@ -171,6 +205,9 @@ client.on("message", message => {
     message.channel.send(image)
         }
     });
+
+
+
 
 
 
@@ -195,22 +232,7 @@ client.on('message', message => {
       }
 }); // end of function
 
-client.on('message', msg => {
-        if (msg.content.startsWith(prefix + ".warn")) {
-           let args = msg.content.split(" ").slice(1);
-          if (!msg.mentions.members.first()) return msg.reply('منشن الشخص المحدد')
-          if (!args[1]) return msg.reply('``اكتب السبب``')
-          //غير اسم الروم او سوي روم بذا الاسم
-          if (msg.guild.channels.find('name', 'warns')) {
-            //اذا غيرت فوق غير هنا كمان
-            msg.guild.channels.find('name', 'warns').send(`
-          تم اعطائك تنبيه : ${msg.mentions.members.first()}
-          لأنك قمت بما يلي
-          ${args.join(" ").split(msg.mentions.members.first()).slice(' ')}
-          `)
-          }
-        }
-})
+
 
 
 
