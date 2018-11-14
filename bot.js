@@ -396,35 +396,7 @@ client.on('message', msg => {
                            }
                         });
 			  
-			  
-
-
-
-
-
-
-
-
-                        client.on('message', message => {
-                          if (message.author.bot) return;
-                          if(message.channel.type === "dm") {
-                              let embed = new Discord.RichEmbed()
-                              .setTimestamp()
-                              .setTitle("Direct Message To <bot>")
-                              .addField(`Sent By:`,`<@${message.author.id}>`)
-                              .setColor("RANDOM")
-                              .setThumbnail(message.author.displayAvatarURL)
-                              .addField(`Message: `,message.content)
-                              .setFooter(`DM Bot Messages | DM Logs`)
-                             
-                              guild = client.guilds.get("511577932544737281")
-                              channel = guild.channels.find("id", "511611197339205634") // This will find the channel which it will send the log embed into.
-                              channel.send(embed)
-                            }
-                      })
-
-
-
+			 
 
 
 
@@ -443,6 +415,14 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
       .setTimestamp()
     logsChannel.send(embed);
   });
+
+
+
+
+
+
+
+
 
 
                           client.on(`message`, async message => {
