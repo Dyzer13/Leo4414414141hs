@@ -311,7 +311,6 @@ client.on('message', message => {
 });
 
 
-
 client.on('message', message => {
     if (message.author.bot) return;
 if (message.content.startsWith(prefix + "uptime")) {
@@ -358,7 +357,6 @@ if (message.content.startsWith(prefix + "uptime")) {
 
 
 
-
 client.on('message', msg => {
     //Code By : ‡ ♪ ℬℐℓѦℓ✋ ‡#2026
     if(msg.content.startsWith(prefix +'suggest')) {
@@ -386,7 +384,6 @@ client.on('message', msg => {
 
 
 
-
   client.on("message", (message) => {
     if (message.content.startsWith(prefix +"setchannel")) {
             let args = message.content.split(" ").slice(1);
@@ -396,6 +393,7 @@ client.on('message', msg => {
     }
     });
     
+
     client.on("message", (message) => {
         if (message.content.startsWith(prefix +"setvoice")) {
                 let args = message.content.split(" ").slice(1);
@@ -405,15 +403,6 @@ client.on('message', msg => {
         }
         });
 
-
-
-
-        
-       
-
-
-			  
-			  
                           client.on('message' , message => {
  
                             if (message.content === prefix +"inv") {
@@ -491,15 +480,6 @@ client.on('messageUpdate', (oldMessage, newMessage) => {
                           }
                           }
                         });
-
-
-
-
-});
-
-
-
-
 
 
 
