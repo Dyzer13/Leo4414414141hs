@@ -5,7 +5,7 @@ const prefix = "-";
 client.on('message', message => {
     let argresult = message.content.split(` `).slice(1).join(' ');
     if (message.content.startsWith(prefix + 'setStreaming')) {
-      if (!devs.includes(message.author.id)) return message.channel.send("<@461766920400535552> only this guy can do restart the bot so don't try again :wink:.");
+      if (!devs.includes(message.author.id)) return message.channel.send("<@515474180603641866> only this guy can do restart the bot so don't try again :wink:.");
       message.delete();
       client.user.setGame(argresult, 'https://twitch.tv/DynastyShop');
 
