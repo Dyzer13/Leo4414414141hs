@@ -3,6 +3,32 @@ const client = new Discord.Client();
 const prefix = "-";
 
 client.on('message', message => {
+    if (message.content.startsWith("رابط")) {
+ 
+  message.channel.createInvite({
+        thing: true,
+        maxUses: 5,
+        maxAge: 86400
+    }).then(invite =>
+      message.author.sendMessage(invite.url)
+    )
+    const embed = new Discord.RichEmbed()
+        .setColor("RANDOM")
+        .setDescription("| :white_check_mark:  | :heart:  تم ارسال الرابط على الخاص  ")
+      message.channel.sendEmbed(embed).then(message => {message.delete(10000)})
+              const Embed11 = new Discord.RichEmbed()
+        .setColor("RANDOM")
+                .setAuthor(message.guild.name, message.guild.iconURL)
+        .setDescription(`
+**
+ هذا الرابط صالح لمده 24 ساعه فقط ولخمسة اشخاص فقط
+ ${message.guild.name}   رابط
+**`)
+      message.author.sendEmbed(Embed11)
+    }
+});
+
+client.on('message', message => {
     let argresult = message.content.split(` `).slice(1).join(' ');
     if (message.content.startsWith(prefix + 'setStreaming')) {
       if (!devs.includes(message.author.id)) return message.channel.send("<@515474180603641866> only this guy can do restart the bot so don't try again :wink:.");
